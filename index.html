@@ -325,6 +325,39 @@
     @media(max-width:1100px){.trust-logo{display:none}}
   
     @media(max-width:700px){.hero-copy .hero-brand{width:58px!important;top:5.5%}}
+
+    /* ===== MOBILE v3: product cards = screenshot size (~2 cards, 2nd slightly cut) ===== */
+    @media(max-width:700px){
+      .product-grid{--per:1.97;--gap:5.6vw}
+      .veg-badge{left:8px;top:8px;width:10px;height:10px}
+      .discount{right:8px;top:8px;width:38px;height:14px;font-size:7.5px;border-radius:2px}
+      .wishlist{right:8px;top:27px;width:13px;height:13px}
+      .product-details{padding:9px 10px 10px}
+      .product-meta{height:12px}
+      .product-type{font-size:8px;line-height:12px}
+      .rating{font-size:7.5px;line-height:12px}
+      .product-title{font-size:11px;line-height:15px;margin:5px 0 7px}
+      .price-row{height:18px;gap:4px}
+      .price{gap:3px;flex-wrap:nowrap}
+      .price strong{font-size:11px}
+      .price del{font-size:7.5px}
+      .size-select{flex:0 1 62px;width:62px;min-width:0;height:17px;font-size:8px;padding:0 12px 0 4px;background-size:6px;background-position:right 5px center}
+      .product-actions{gap:4px;margin-top:8px}
+      .product-actions button{height:20px;font-size:8px;gap:3px}
+      .product-actions svg{width:9px;height:9px}
+      /* arrows: black rectangle 14x30, prev flush to card left, next just inside screen edge */
+      .slider-arrow{width:14px;height:30px;top:calc(26.4vw - 7.6px)}
+      .slider-arrow.prev{left:0}
+      .slider-arrow.next{right:-4vw}
+      .slider-arrow svg{width:10px;height:10px}
+    }
+
+    /* ===== DESKTOP dots: active = bigger red, others smaller grey ===== */
+    @media(min-width:701px){
+      .slider-dots{gap:10px}
+      .slider-dot{width:5px;height:5px;transition:width .25s,height .25s,background .25s}
+      .slider-dot.active{width:10px;height:10px;background:#ed1c2b}
+    }
   </style>
 </head>
 <body>
