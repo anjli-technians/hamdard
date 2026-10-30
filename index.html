@@ -223,8 +223,8 @@
       .hero-copy p{position:absolute;left:20%;top:25.5%;width:60%;margin:0;text-align:center;font-size:9px;line-height:1.35;max-width:none}
       .hero-shop-button{position:absolute;left:50%;top:86%;transform:translateX(-50%);font-size:12px;padding:9px 26px;white-space:nowrap}
       .hero-track>.hero-slide:nth-child(2){display:block}
-      .hero-track>.hero-slide:nth-child(2) a{display:block;height:100%}
-      .hero-track>.hero-slide:nth-child(2) img{height:100%;aspect-ratio:auto;object-fit:cover;object-position:78% center}
+      .hero-track>.hero-slide:nth-child(2)>a{display:block;height:100%}
+      .hero-track>.hero-slide:nth-child(2)>a>img{height:100%;aspect-ratio:auto;object-fit:cover;object-position:78% center}
       .hero-dots{bottom:8px}
       /* benefits 2x2 */
       .benefits{display:grid;grid-template-columns:1fr 1fr;padding:8px 6vw;margin:0;height:auto;background:#fff5f5}
@@ -387,7 +387,14 @@
         </div>
         <img class="hero-offer-badge" src="assets/hero-offer-badge.png" alt="Get up to 15% off">
       </article>
-      <article class="hero-slide active"><a href="#beverages"><img src="assets/hamdard-beverages-banner.png" alt="Hamdard beverages product collection"></a></article></div>
+      <article class="hero-slide active" style="position:relative"><a href="#beverages"><img src="assets/hamdard-beverages-banner.png" alt="Hamdard beverages product collection"></a>
+        <div class="hero-copy">
+          <img class="hero-brand" src="assets/hamdard-logo.png" alt="Hamdard - Trusted since 1906">
+          <h1>Festival<br><span>Dhamaka Offer</span></h1>
+          <p>Lorem ipsum dolor sit amet consectetur. Integer pretium id non quis et mattis morbi. Lorem ipsum dolor sit amet consectetur. Integer pretium id non quis et.</p>
+          <a class="hero-shop-button" href="#offers">Shop Now</a>
+        </div>
+      </article></div>
       <div class="hero-dots" aria-label="Choose banner"></div>
     </section>
     <section class="benefits" id="delivery"><div class="benefit"><span class="benefit__icon"><img src="assets/benefit-shipping.png" alt=""></span><div><strong>Free Shipping</strong><small>on orders above ₹499</small></div></div><div class="benefit"><span class="benefit__icon"><img src="assets/benefit-authentic.png" alt=""></span><div><strong>100% Authentic</strong><small>Hamdard Products</small></div></div><div class="benefit"><span class="benefit__icon"><img src="assets/benefit-payments.png" alt=""></span><div><strong>Secure Payments</strong><small>Shop with confidence</small></div></div><div class="benefit"><span class="benefit__icon"><img src="assets/benefit-delivery.png" alt=""></span><div><strong>Pan India Delivery</strong><small>Fast & Reliable</small></div></div></section>
