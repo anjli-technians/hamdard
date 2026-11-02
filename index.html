@@ -376,9 +376,9 @@
     /* ===== PRODUCT HOVER IMAGE (per product, only when data.hover is set) ===== */
     .product-card__visual .img-main,
     .product-card__visual .img-hover{transition:opacity .35s ease}
-    .product-card__visual .img-hover{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);opacity:0;pointer-events:none;z-index:1}
+    .product-card__visual .img-hover{position:absolute;top:0;left:0;right: 0;bottom: 0;opacity:0;pointer-events:none;z-index:1;margin: auto;}
     @media(hover:hover){
-      .product-card:hover .product-card__visual.has-hover .img-hover{opacity:1}
+      .product-card:hover .product-card__visual.has-hover .img-hover{opacity:1;transform:scale(1.2)}
       .product-card:hover .product-card__visual.has-hover .img-main{opacity:0}
     }
   </style>
