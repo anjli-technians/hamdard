@@ -381,6 +381,16 @@
       .product-card:hover .product-card__visual.has-hover .img-hover{opacity:1;transform:scale(1.2)}
       .product-card:hover .product-card__visual.has-hover .img-main{opacity:0}
     }
+
+    /* ===== Honey / Saffron mobile: apna mob banner + flowing text (no overlap) ===== */
+    @media(max-width:700px){
+      .hero-slide--stack .hero-copy{display:flex;flex-direction:column;align-items:center;padding:11% 18px 0}
+      .hero-slide--stack .hero-copy h1,
+      .hero-slide--stack .hero-copy p{position:static;width:100%;max-width:340px}
+      .hero-slide--stack .hero-copy h1{font-size:7.4vw;line-height:1.12;margin:0 0 10px}
+      .hero-slide--stack .hero-copy h1 br{display:inline}
+      .hero-slide--stack .hero-copy p{font-size:11px;line-height:1.4;padding:0}
+    }
   </style>
 </head>
 <body>
@@ -412,7 +422,7 @@
         <!-- <img class="hero-mobile-products" src="assets/hero-mobile-products.png" alt="Hamdard Khaalis Vermicelli, Soya Magic and Rooh Afza"> -->
         <img class="hero-mobile-badge" src="assets/hero-mobile-badge.png" alt="Get up to 15% off">
         <div class="hero-copy">
-          <img class="hero-brand" src="assets/hamdard-logo.png" alt="Hamdard - Trusted since 1906">
+          <!-- <img class="hero-brand" src="assets/hamdard-logo.png" alt="Hamdard - Trusted since 1906"> -->
           <h1>Festival <br><span>Dhamaka Offer</span></h1>
           <p>Lorem ipsum dolor sit amet consectetur. Integer pretium id non quis et mattis morbi. Lorem ipsum dolor sit amet consectetur. Integer pretium id non quis et.</p>
           <a class="hero-shop-button" href="#offers">Shop Now</a>
@@ -425,36 +435,32 @@
         <!-- <img class="hero-mobile-products" src="assets/hero-mobile-products.png" alt="Hamdard Khaalis Vermicelli, Soya Magic and Rooh Afza"> -->
         <img class="hero-mobile-badge" src="assets/hero-mobile-badge.png" alt="Get up to 15% off">
         <div class="hero-copy">
-          <img class="hero-brand" src="assets/hamdard-logo.png" alt="Hamdard - Trusted since 1906">
+          <!-- <img class="hero-brand" src="assets/hamdard-logo.png" alt="Hamdard - Trusted since 1906"> -->
           <h1><span style="color:#FF5960;">RoohAfza</span> and Beyond</h1>
           <p>Lorem ipsum dolor sit amet consectetur. Integer pretium id non quis et mattis morbi Lorem ipsum dolor sit amet consectetur. Integer pretium id non quis et mattis morbi </p>
           <a class="hero-shop-button" href="#offers">Shop Now</a>
         </div>
         <img class="hero-offer-badge" src="assets/hero-offer-badge.png" alt="Get up to 15% off">
       </article>
-    <article class="hero-slide hero-slide--simple active">
-        <img class="hero-background" src="assets/honey-banner.jpg" alt="Hamdard beverages">
+      <article class="hero-slide hero-slide--stack active">
+        <img class="hero-background" src="assets/honey-banner.jpg" alt="Hamdard Honey">
         <img class="hero-mobile-bg" src="assets/honey-banner-mob.jpg" alt="" aria-hidden="true">
-        <!-- <img class="hero-mobile-products" src="assets/hero-mobile-products.png" alt="Hamdard Khaalis Vermicelli, Soya Magic and Rooh Afza"> -->
-        <img class="hero-mobile-badge" src="assets/hero-mobile-badge.png" alt="Get up to 15% off">
+        <img class="hero-mobile-badge" src="assets/25off.png" alt="Get up to 25% off">
         <div class="hero-copy">
-          <!-- <img class="hero-brand" src="assets/hamdard-logo.png" alt="Hamdard - Trusted since 1906"> -->
-          <h1><span style="color:#FF5960;">Subah Ki Shuruaat, <br>Apne Andaaz Mein</h1>
+          <h1><span style="color:#FF5960;">Subah Ki Shuruaat,<br>Apne Andaaz Mein</span></h1>
           <p>Apne morning routine mein shaamil karein Hamdard Honey</p>
-          <a class="hero-shop-button" href="#offers">Shop Now</a>
+          <a class="hero-shop-button" href="#honey">Shop Now</a>
         </div>
         <img class="hero-offer-badge" src="assets/hero-offer-badge.png" alt="Get up to 15% off">
       </article>
-      <article class="hero-slide hero-slide--simple active">
-        <img class="hero-background" src="assets/saffron-banner.jpg" alt="Hamdard beverages">
+      <article class="hero-slide hero-slide--stack active">
+        <img class="hero-background" src="assets/saffron-banner.jpg" alt="Hamdard Saffron">
         <img class="hero-mobile-bg" src="assets/saffron-banner-mob.jpg" alt="" aria-hidden="true">
-        <!-- <img class="hero-mobile-products" src="assets/hero-mobile-products.png" alt="Hamdard Khaalis Vermicelli, Soya Magic and Rooh Afza"> -->
         <img class="hero-mobile-badge" src="assets/hero-mobile-badge.png" alt="Get up to 15% off">
         <div class="hero-copy">
-          <!-- <img class="hero-brand" src="assets/hamdard-logo.png" alt="Hamdard - Trusted since 1906"> -->
-          <h1><span style="color:#a73557;">Roz Ke Khaane Mein, Kuch Khaas Sa  </span></h1>
+          <h1><span style="color:#a73557;">Roz Ke Khaane Mein,<br>Kuch Khaas Sa</span></h1>
           <p>Milk, sweets aur desserts mein laayein swaad ka ek shahi andaaz</p>
-          <a class="hero-shop-button" href="#offers">Shop Now</a>
+          <a class="hero-shop-button" href="#spices">Shop Now</a>
         </div>
         <img class="hero-offer-badge" src="assets/hero-offer-badge.png" alt="Get up to 15% off">
       </article>
