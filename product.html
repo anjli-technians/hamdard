@@ -1095,6 +1095,13 @@ body.cart-open .hm-toast{bottom:120px}
   .g-main{aspect-ratio:auto;height:var(--g-h,auto)}
   .gallery{max-width:min(560px,100%)}
 }
+/* PHONE thumbnails: fix height (iPhone Safari aspect-ratio ko Swiper ke andar sahi nahi samajhta) */
+@media(max-width:700px){
+  .g-thumbs{height:auto!important}
+  .g-thumbs .swiper-wrapper{align-items:flex-start}
+  .g-thumbs .swiper-slide{aspect-ratio:auto!important;height:calc((min(90vw,560px) - 28px) / 4.5)!important;max-height:110px}
+  .g-thumbs .swiper-slide img{width:100%!important;height:100%!important;object-fit:cover;display:block}
+}
 </style>
 </head>
 <body data-page="product">
@@ -1600,7 +1607,7 @@ body.cart-open .hm-toast{bottom:120px}
           var maxW=gm.parentNode.getBoundingClientRect().width,gh2=Math.min(maxW*1.02,620);
           P.setProperty('--g-h',Math.round(gh2)+'px');
           var over=price.getBoundingClientRect().bottom+window.scrollY+12-window.innerHeight;
-          if(over>0)P.setProperty('--g-h',Math.round(Math.max(200,gh2-over))+'px');
+          if(over>0&&gh2-over>=maxW*0.75)P.setProperty('--g-h',Math.round(gh2-over)+'px');
           return;}
         var top=Math.max(0,pdp.getBoundingClientRect().top+window.scrollY);
         var screenH=Math.max(340,window.innerHeight-top);            /* header ke neeche bachi screen */
