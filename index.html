@@ -392,6 +392,138 @@
       /* .hero-slide--stack .hero-copy h1 br{display:inline} */
       /* .hero-slide--stack .hero-copy p{font-size:11px;line-height:1.4;padding:0} */
     }
+
+    /* =====================================================================
+       HERO description visibility fix
+       ===================================================================== */
+
+    /* left side par soft dark gradient, taaki white text clearly dikhe */
+    .hero-slide::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:1;
+      pointer-events:none;
+      background:linear-gradient(90deg,
+        rgba(90,10,10,.55) 0%,
+        rgba(90,10,10,.35) 30%,
+        rgba(90,10,10,0) 55%);
+    }
+    .hero-copy{z-index:2}
+
+    /* text strong aur readable */
+    .hero-copy h1,
+    .hero-copy p{
+      text-shadow:0 2px 6px rgba(70,5,5,.65), 0 1px 2px rgba(70,5,5,.8);
+    }
+    .hero-copy p{font-weight:600}
+
+    /* desktop: paragraph ko bottle se pehle rokna */
+    @media(min-width:1101px){
+      .hero-copy p{
+        max-width:30vw;
+        font-size:1.1vw;
+        line-height:1.4;
+      }
+      /* slide 2: logo aur heading ka overlap kam karne ke liye heading neeche */
+      .hero-track>.hero-slide:nth-child(2) .hero-copy{top:24%}
+    }
+
+    /* mobile: gradient upar se, kyunki text center me hai */
+    @media(max-width:700px){
+      .hero-slide::before{
+        background:linear-gradient(180deg,
+          rgba(90,10,10,.45) 0%,
+          rgba(90,10,10,.25) 40%,
+          rgba(90,10,10,0) 60%);
+      }
+      .hero-copy p{font-weight:500;text-shadow:0 1px 4px rgba(70,5,5,.8)}
+    }
+
+    /* ===== MOBILE SIDE DRAWER (Shop All dropdown) ===== */
+    .m-drawer{display:none}
+    @media(max-width:700px){
+      .m-drawer{display:flex;flex-direction:column;position:fixed;inset:0;z-index:1000;background:#fff;transform:translateX(-100%);visibility:hidden;transition:transform .32s ease,visibility 0s linear .32s}
+      .m-drawer.open{transform:none;visibility:visible;transition:transform .32s ease}
+      .m-drawer__bar{background:var(--red);color:#fff;text-align:center;font-size:11px;font-weight:500;padding:7px 10px;flex:0 0 auto}
+      .m-drawer__back{display:flex;align-items:center;gap:8px;padding:16px 18px 10px;border:0;background:none;color:#12263f;font-size:15px;font-weight:500;cursor:pointer;text-align:left;flex:0 0 auto}
+      .m-drawer__back svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+      .m-drawer__search{display:flex;align-items:center;gap:8px;margin:4px 18px 12px;height:40px;padding:0 12px;border:1px solid #d9d9d9;border-radius:8px;background:#fff;flex:0 0 auto}
+      .m-drawer__search svg{width:16px;height:16px;fill:none;stroke:#777;stroke-width:2;stroke-linecap:round;flex:0 0 auto}
+      .m-drawer__search input{flex:1;min-width:0;border:0;outline:0;background:none;font-size:13px;color:var(--ink)}
+      .m-drawer__scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:0 18px 12px}
+      .m-row{display:flex;align-items:center;gap:14px;width:100%;padding:11px 12px;border:0;border-radius:8px;background:none;color:#12263f;font-size:15px;font-weight:500;text-align:left;cursor:pointer}
+      .m-row .m-ico{width:36px;height:36px;border-radius:50%;object-fit:cover;flex:0 0 36px;background:#f2f2f2}
+      .m-row .m-label{flex:1}
+      .m-row .m-chev{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;flex:0 0 auto;transition:transform .25s}
+      .m-all{background:#e3f1f1;font-weight:600;margin-bottom:2px}
+      .m-all .m-ico-grid{width:36px;height:36px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex:0 0 36px}
+      .m-all .m-ico-grid svg{width:18px;height:18px;fill:var(--red)}
+      .m-all[aria-expanded="true"] .m-chev{transform:rotate(90deg)}
+      .m-sub{overflow:hidden;max-height:0;transition:max-height .3s ease}
+      .m-sub.open{max-height:900px}
+      .m-sub a{border-bottom:1px solid #f0f0f0}
+      .m-sub a:last-child{border-bottom:0}
+      .m-sub .m-row{padding-left:14px}
+      .m-empty{display:none;padding:14px 12px;font-size:13px;color:var(--muted)}
+      .m-drawer__tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:12px 18px calc(16px + env(safe-area-inset-bottom,0px));border-top:1px solid #f0f0f0;flex:0 0 auto;background:#fff}
+      .m-tile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:12px 4px;border-radius:10px;background:#fde9ea;color:var(--red);font-size:12px;font-weight:600;text-align:center;line-height:1.2}
+      .m-tile svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+      .m-tile small{display:block;font-size:10px;font-weight:500;color:#12263f}
+      body.drawer-open{overflow:hidden}
+    }
+
+    /* ===== MOBILE floating Gift + WhatsApp buttons ===== */
+    .m-float{display:none}
+    @media(max-width:700px){
+      .m-float{display:flex;align-items:center;justify-content:center;position:fixed;bottom:16px;width:46px;height:46px;border-radius:50%;z-index:1100;box-shadow:0 3px 10px rgba(0,0,0,.25);color:#fff}
+      .m-float svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+      .m-float--gift{left:14px;background:#4fb8b4}
+      .m-float--wa{right:14px;background:#0f766e}
+      .m-float--wa svg{fill:currentColor;stroke:none}
+      .m-drawer__tiles{padding-bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+    }
+  
+    /* ===== FIX 1: product card hover — hover image poore visual par, bina atke ===== */
+    .product-card__visual{isolation:isolate}
+    .product-card__visual .img-main{position:relative;z-index:0}
+    .product-card__visual .img-hover{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;margin:0!important;object-fit:cover!important;mix-blend-mode:normal!important;transform:none!important;opacity:0;pointer-events:none!important;z-index:1}
+    .product-card__visual .img-main,.product-card__visual .img-hover{transition:opacity .3s ease}
+    @media(hover:hover){
+      .product-card__visual.has-hover:hover .img-hover,
+      .product-card:hover .product-card__visual.has-hover .img-hover{opacity:1;transform:none!important}
+      .product-card:hover .product-card__visual.has-hover .img-main{opacity:0}
+    }
+    /* badges hover image ke upar rahein */
+    .product-card__visual .veg-badge,.product-card__visual .discount,.product-card__visual .wishlist{z-index:3}
+
+    /* ===== FIX 2: desktop "All Categories" mega dropdown ===== */
+    .nav-all-wrap{display:none}
+    @media(min-width:701px){
+      .main-nav{position:relative}
+      .nav-all-wrap{display:block;position:relative;flex:0 0 auto}
+      .nav-all-wrap>.nav-all{margin-right:0}
+      .mega{position:absolute;left:0;top:100%;width:230px;padding-top:10px;opacity:0;visibility:hidden;transform:translateY(6px);transition:opacity .2s,transform .2s,visibility 0s .2s;z-index:900}
+      .nav-all-wrap:hover .mega,.nav-all-wrap:focus-within .mega{opacity:1;visibility:visible;transform:none;transition:opacity .2s,transform .2s}
+      .mega__panel{background:#fff;border-radius:12px;box-shadow:0 12px 32px #0000001f;padding:12px 10px}
+      .mega__top{display:block;padding:8px 14px;font-weight:600;font-size:14px}
+      .mega__top.red{color:var(--red)}
+      .mega__sep{height:6px}
+      .mega__item{position:relative}
+      .mega__link{display:flex;justify-content:space-between;align-items:center;padding:11px 14px;border-radius:8px;font-size:14px;font-weight:500;color:#171717}
+      .mega__item:hover>.mega__link,.mega__link.is-first{background:#fff1f1;color:var(--red)}
+      .mega__link svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+      .mega__fly{position:absolute;left:100%;top:0;margin-left:2px;width:230px;padding:10px;background:#fff;border-radius:12px;box-shadow:0 12px 32px #0000001f;opacity:0;visibility:hidden;transition:opacity .15s,visibility 0s .15s}
+      .mega__fly:before{content:"";position:absolute;left:-8px;top:0;width:8px;height:100%}
+      .mega__item:hover>.mega__fly{opacity:1;visibility:visible;transition:opacity .15s}
+      .mega__fly a{display:block;padding:9px 12px;border-radius:8px;font-size:13.5px;color:#444}
+      .mega__fly a:hover{background:#fff1f1;color:var(--red)}
+    }
+
+    /* ===== FIX 3: mobile drawer row — pura row clickable ===== */
+    @media(max-width:700px){
+      .m-sub a.m-row{cursor:pointer}
+    }
   </style>
 </head>
 <body>
@@ -414,7 +546,25 @@
     <span class="header-divider" aria-hidden="true"></span>
     <!-- <img class="trust-logo" src="assets/hamdard-logo.png" alt="Hamdard - Trusted since 1906"> -->
   </header>
-  <nav class="main-nav" aria-label="Main navigation"><a class="nav-all" href="#categories"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="5" r="1.3"/><circle cx="12" cy="5" r="1.3"/><circle cx="19" cy="5" r="1.3"/><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/><circle cx="5" cy="19" r="1.3"/><circle cx="12" cy="19" r="1.3"/><circle cx="19" cy="19" r="1.3"/></svg>All Categories<svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a><a class="nav-link" href="#offers"><span class="nav-badge">Upto 30%</span><img class="nav-icon" src="assets/icon-offer.png" alt=""> Offers</a><a class="nav-link" href="#beverages"><img class="nav-icon" src="assets/Beverages.png" alt=""> Beverages</a><a class="nav-link" href="#spices"><img class="nav-icon" src="assets/icon-spices.png" alt=""> Spices</a><a class="nav-link" href="#edible-oil"><img class="nav-icon" src="assets/icon-edible-oil.png" alt=""> Edible Oil</a><a class="nav-link" href="#honey"><img class="nav-icon" src="assets/icon-honey.png" alt=""> Honey</a><a class="nav-link" href="#ready-to-cook"><img class="nav-icon" src="assets/icon-ready-to-cook.png" alt=""> Ready to cook</a><a class="nav-link" href="#health-care"><img class="nav-icon" src="assets/icon-health.png" alt=""> Health Care</a><a class="nav-link" href="#combos"><img class="nav-icon" src="assets/icon-combos.png" alt=""> Combos</a><a class="nav-link" href="#contact"><img class="nav-icon" src="assets/icon-contact.png" alt=""> Contact</a><a class="track-order" href="#delivery"><img class="nav-icon" src="assets/cart.png" alt=""> Track Order</a></nav>
+
+  <a class="m-float m-float--gift" href="#offers" aria-label="Offers"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8M7.5 8a2.5 2.5 0 1 1 0-5C10 3 12 8 12 8zM16.5 8a2.5 2.5 0 1 0 0-5C14 3 12 8 12 8z"/></svg></a>
+  <a class="m-float m-float--wa" href="https://wa.me/91XXXXXXXXXX" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.2 1.2-1.7 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.7 1.2 1.5 1.9 1 .9 1.8 1.2 2.1 1.3.3.1.4.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></a>
+  <aside class="m-drawer" id="m-drawer" aria-hidden="true" aria-label="Shop menu">
+    <div class="m-drawer__bar">Free Shipping for orders above ₹499 across India</div>
+    <button class="m-drawer__back" type="button" data-close><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M10 3L5 8l5 5"/></svg>Back to Shop</button>
+    <label class="m-drawer__search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg><input type="search" id="m-drawer-q" placeholder="Search for products..." aria-label="Search categories"></label>
+    <div class="m-drawer__scroll">
+      <button class="m-row m-all" type="button" id="m-all-btn" aria-expanded="true" aria-controls="m-sub"><span class="m-ico-grid"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="5" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="12" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="12" cy="19" r="2"/><circle cx="19" cy="19" r="2"/></svg></span><span class="m-label">Shop All</span><svg class="m-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></button>
+      <div class="m-sub open" id="m-sub"><a class="m-row" href="#beverages"><img class="m-ico" src="assets/category-beverages.png" alt="" loading="lazy"><span class="m-label">Beverages</span><svg class="m-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a><a class="m-row" href="#spices"><img class="m-ico" src="assets/category-spices.png" alt="" loading="lazy"><span class="m-label">Spices</span><svg class="m-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a><a class="m-row" href="#edible-oil"><img class="m-ico" src="assets/category-edible-oil.png" alt="" loading="lazy"><span class="m-label">Edible Oil</span><svg class="m-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a><a class="m-row" href="#honey"><img class="m-ico" src="assets/category-honey.png" alt="" loading="lazy"><span class="m-label">Honey</span><svg class="m-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a><a class="m-row" href="#ready-to-cook"><img class="m-ico" src="assets/category-ready-to-cook.png" alt="" loading="lazy"><span class="m-label">Ready to Cook</span><svg class="m-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a><a class="m-row" href="#health-care"><img class="m-ico" src="assets/category-health-care.png" alt="" loading="lazy"><span class="m-label">Health Care</span><svg class="m-chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg></a></div>
+      <div class="m-empty" id="m-empty">No categories found</div>
+    </div>
+    <div class="m-drawer__tiles">
+      <a class="m-tile" href="#offers"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1"/></svg><span>Sale<small>Upto 20%</small></span></a>
+      <a class="m-tile" href="#combos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 21V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg><span>Combos</span></a>
+      <a class="m-tile" href="#products"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6.5 7 .9-5.1 4.8 1.3 7L12 17.8 5.8 21.2l1.3-7L2 9.4l7-.9z"/></svg><span>Bestsellers</span></a>
+    </div>
+  </aside>
+  <nav class="main-nav" aria-label="Main navigation"><div class="nav-all-wrap"><a class="nav-all" href="#categories"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="5" r="1.3"/><circle cx="12" cy="5" r="1.3"/><circle cx="19" cy="5" r="1.3"/><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/><circle cx="5" cy="19" r="1.3"/><circle cx="12" cy="19" r="1.3"/><circle cx="19" cy="19" r="1.3"/></svg>All Categories<svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a><div class="mega"><div class="mega__panel"><a class="mega__top" href="#products">Shop All ›</a><a class="mega__top red" href="#products">Best Sellers</a><div class="mega__sep"></div><div class="mega__item"><a class="mega__link" href="#offers">Offers</a></div><div class="mega__item"><a class="mega__link" href="#beverages">Beverages<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5l3.5 3.5L3 8.5"/></svg></a><div class="mega__fly"><a href="#beverages">Syrups & Concentrates</a><a href="#beverages">Dairy</a><a href="#beverages">Ready to Drink</a><a href="#beverages">Coconut Water</a><a href="#beverages">Glucose</a></div></div><div class="mega__item"><a class="mega__link" href="#spices">Spices<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5l3.5 3.5L3 8.5"/></svg></a><div class="mega__fly"><a href="#spices">Blended Spices</a><a href="#spices">Powdered Spices</a><a href="#spices">Whole Spices</a><a href="#spices">Saffron & Hing</a></div></div><div class="mega__item"><a class="mega__link" href="#edible-oil">Edible Oil<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5l3.5 3.5L3 8.5"/></svg></a><div class="mega__fly"><a href="#edible-oil">Olive Pomace Oil</a><a href="#edible-oil">Mustard Oil</a></div></div><div class="mega__item"><a class="mega__link" href="#honey">Honey</a></div><div class="mega__item"><a class="mega__link" href="#ready-to-cook">Ready to cook</a></div><div class="mega__item"><a class="mega__link" href="#health-care">Health Care</a></div><div class="mega__item"><a class="mega__link" href="#combos">Combos</a></div></div></div></div><a class="nav-link" href="#offers"><span class="nav-badge">Upto 30%</span><img class="nav-icon" src="assets/icon-offer.png" alt=""> Offers</a><a class="nav-link" href="#beverages"><img class="nav-icon" src="assets/Beverages.png" alt=""> Beverages</a><a class="nav-link" href="#spices"><img class="nav-icon" src="assets/icon-spices.png" alt=""> Spices</a><a class="nav-link" href="#edible-oil"><img class="nav-icon" src="assets/icon-edible-oil.png" alt=""> Edible Oil</a><a class="nav-link" href="#honey"><img class="nav-icon" src="assets/icon-honey.png" alt=""> Honey</a><a class="nav-link" href="#ready-to-cook"><img class="nav-icon" src="assets/icon-ready-to-cook.png" alt=""> Ready to cook</a><a class="nav-link" href="#health-care"><img class="nav-icon" src="assets/icon-health.png" alt=""> Health Care</a><a class="nav-link" href="#combos"><img class="nav-icon" src="assets/icon-combos.png" alt=""> Combos</a><a class="nav-link" href="#contact"><img class="nav-icon" src="assets/icon-contact.png" alt=""> Contact</a><a class="track-order" href="#delivery"><img class="nav-icon" src="assets/cart.png" alt=""> Track Order</a></nav>
   <main id="top">
     <section class="hero" aria-label="Featured offers">
       <div class="hero-track"><article class="hero-slide active">
@@ -640,8 +790,32 @@
       /* stop native image/link ghost-drag inside sliders */
       document.querySelectorAll('.hero img,.hero a,.slider-viewport img,.slider-viewport a').forEach(function(el){el.setAttribute('draggable','false');});
 
-      /* mobile menu */
-      (function(){var b=document.querySelector('.menu-toggle'),nav=document.querySelector('.main-nav');if(!b||!nav)return;b.addEventListener('click',function(){var o=nav.classList.toggle('open');b.setAttribute('aria-expanded',o);});nav.addEventListener('click',function(e){if(e.target.closest('a')){nav.classList.remove('open');b.setAttribute('aria-expanded','false');}});})();
+      /* mobile side drawer */
+      (function(){
+        var b=document.querySelector('.menu-toggle'),d=document.getElementById('m-drawer');if(!b||!d)return;
+        var allBtn=document.getElementById('m-all-btn'),sub=document.getElementById('m-sub'),q=document.getElementById('m-drawer-q'),empty=document.getElementById('m-empty');
+        function setOpen(o){d.classList.toggle('open',o);d.setAttribute('aria-hidden',!o);b.setAttribute('aria-expanded',o);document.body.classList.toggle('drawer-open',o);}
+        b.addEventListener('click',function(){setOpen(true);});
+        d.addEventListener('click',function(e){
+          if(e.target.closest('[data-close]')){setOpen(false);return;}
+          var a=e.target.closest('a');if(!a)return;
+          var href=a.getAttribute('href')||'';
+          setOpen(false);
+          if(href.charAt(0)==='#'&&href.length>1){
+            e.preventDefault();
+            setTimeout(function(){var t=document.getElementById(href.slice(1));if(t)t.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'',href);},60);
+          }
+        });
+        document.addEventListener('keydown',function(e){if(e.key==='Escape')setOpen(false);});
+        window.addEventListener('resize',function(){if(window.innerWidth>700)setOpen(false);});
+        allBtn.addEventListener('click',function(){var o=!sub.classList.contains('open');sub.classList.toggle('open',o);allBtn.setAttribute('aria-expanded',o);});
+        q.addEventListener('input',function(){
+          var t=q.value.trim().toLowerCase(),n=0;
+          if(t&&!sub.classList.contains('open')){sub.classList.add('open');allBtn.setAttribute('aria-expanded','true');}
+          sub.querySelectorAll('a').forEach(function(a){var m=!t||a.textContent.toLowerCase().indexOf(t)>-1;a.style.display=m?'':'none';if(m)n++;});
+          empty.style.display=n?'none':'block';
+        });
+      })();
     })();
   </script>
 </body>
