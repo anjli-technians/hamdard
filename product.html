@@ -1043,6 +1043,59 @@ body.cart-open .hm-toast{bottom:120px}
 /* bottom quality section (home page wala) — same spacing on these pages */
 .page-content>.quality{margin-top:0}
   </style>
+<style id="hm-hover-fit">
+/* HOVER IMAGE: kabhi kategi nahi (contain). Bachi jagah usi image ke blur se bharti hai, taaki box poora bhara dikhe */
+.product-card__visual img.img-hover{object-fit:contain!important;object-position:center center!important;background:transparent!important;z-index:2!important}
+.product-card__visual.has-hover::before{content:"";position:absolute;inset:-12%;z-index:1;background-image:var(--hover-bg);background-size:cover;background-position:center;filter:blur(16px) saturate(1.1);transform:scale(1.05);opacity:0;transition:opacity .3s ease;pointer-events:none}
+@media(hover:hover){
+  .product-card:hover .product-card__visual.has-hover::before,
+  .product-card__visual.has-hover:hover::before{opacity:1}
+}
+.product-card__visual .veg-badge,.product-card__visual .discount{z-index:3!important}
+.product-card .wishlist{z-index:4!important}
+</style>
+<style id="hm-pdp-onescreen">
+/* =====================================================================
+   PRODUCT SECTION — har screen par khud adjust
+   JS se: --pdp-h (header ke neeche bachi screen), --g-h (image height), --g-w (image width), --k (text scale)
+   ===================================================================== */
+@media(min-width:901px){
+  .pdp{min-height:var(--pdp-h,auto);display:flex;flex-direction:column;justify-content:center;padding:clamp(10px,2.4vh,32px) 0}
+  .pdp .crumbs,.pdp__grid{width:min(calc(1200px * max(1,var(--k,1))),calc(100% - 48px))}
+  .pdp .crumbs{margin-bottom:clamp(6px,1.2vh,14px)}
+  .pdp__grid{align-items:center;grid-template-columns:calc(var(--t-w,88px) + var(--g-gap,12px) + var(--g-w,410px)) minmax(0,1fr);gap:max(24px,calc(36px * var(--k,1)))}
+  .gallery{position:static;grid-template-columns:var(--t-w,88px) minmax(0,1fr);gap:var(--g-gap,12px)}
+  .g-main{aspect-ratio:auto;height:var(--g-h,455px);width:100%}
+  .g-thumbs .swiper-slide{height:calc((var(--g-h,455px) - 4 * var(--g-gap,12px)) / 5)!important}
+  /* text screen ke saath chhota/bada */
+  .pi__type{margin:0 0 4px;font-size:max(11px,calc(12px * var(--k,1)))}
+  .pi__title{font-size:max(20px,calc(38px * var(--k,1)));margin:0 0 calc(14px * var(--k,1))}
+  .pi__meta{margin-bottom:calc(22px * var(--k,1));gap:calc(10px * var(--k,1))}
+  .pill{height:max(26px,calc(32px * var(--k,1)));font-size:max(11px,calc(12.5px * var(--k,1)))}
+  .pi__price strong{font-size:max(20px,calc(34px * var(--k,1)))}
+  .pi__price del{font-size:max(11px,calc(17px * var(--k,1)))}
+  .save{font-size:max(10.5px,calc(10.5px * var(--k,1)))}
+  .pi__tax{font-size:max(11px,calc(11px * var(--k,1)));margin:2px 0 calc(24px * var(--k,1))}
+  .pi__label{font-size:max(11px,calc(13px * var(--k,1)));margin:0 0 calc(10px * var(--k,1))}
+  .variants{gap:calc(12px * var(--k,1));margin-bottom:calc(22px * var(--k,1))}
+  .variant{height:max(30px,calc(36px * var(--k,1)));min-width:max(96px,calc(116px * var(--k,1)));font-size:max(11px,calc(11px * var(--k,1)))}
+  .buy-row{gap:calc(12px * var(--k,1));margin-bottom:calc(24px * var(--k,1))}
+  .buy-row .qty,.buy-row .btn-red{height:max(34px,calc(42px * var(--k,1)));font-size:max(11px,calc(13px * var(--k,1)))}
+  .buy-row .qty{width:max(92px,calc(98px * var(--k,1)))}
+  .buy-row .btn-buy{font-size:max(11px,calc(14px * var(--k,1)))}
+  .pay{font-size:max(11px,calc(13px * var(--k,1)))}
+  .pi__tc{margin:4px 0 calc(16px * var(--k,1));font-size:max(9.5px,calc(9.5px * var(--k,1)))}
+  .acc>summary{padding:calc(14px * var(--k,1)) 0;font-size:max(11px,calc(14px * var(--k,1)))}
+  .pdp.is-tight .pi__tc{display:none}
+  .pdp.is-short .crumbs{display:none}
+  .pdp.is-tight .pi__meta{margin-bottom:8px}
+}
+/* tablet + phone: pehli screen mein image + naam + price dikhe */
+@media(max-width:900px){
+  .g-main{aspect-ratio:auto;height:var(--g-h,auto)}
+  .gallery{max-width:min(560px,100%)}
+}
+</style>
 </head>
 <body data-page="product">
   <div class="announcement"><div class="announcement__inner">
@@ -1131,7 +1184,7 @@ body.cart-open .hm-toast{bottom:120px}
               <span class="pl pl--visa">VISA</span><span class="pl pl--mc" title="Mastercard"></span><span class="pl pl--rupay">Ru<i>Pay</i>›</span><span class="pl pl--upi">UPI</span><span class="pl pl--mae" title="Maestro"></span>
             </span></div>
           <p class="pi__tc">T&amp;C Apply*</p>
-          <details class="acc" open><summary>Description<svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></summary><div class="acc__body">
+          <details class="acc"><summary>Description<svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></summary><div class="acc__body">
             <p>Hamdard Kachi Ghani Mustard Oil is cold-pressed from carefully selected mustard seeds to keep its natural pungency, aroma and nutrients intact — the authentic taste every Indian kitchen deserves.</p>
             <ul><li>Traditional Kachi Ghani (cold-pressed) process</li><li>Rich in MUFA &amp; Omega-3 fatty acids</li><li>Strong aroma, ideal for tadka, pickles and deep frying</li><li>No added colours or preservatives</li></ul></div></details>
           <details class="acc"><summary>Marketed by/ Mfg. &amp; Pkg. By<svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></summary><div class="acc__body">
@@ -1152,14 +1205,14 @@ body.cart-open .hm-toast{bottom:120px}
            Naya card chahiye to ek line copy karke paste karein. Card hatana ho to line delete karein.
            ================================================================== -->
       <div class="product-grid" id="reco-grid">
-        <div class="reco-item" data-id="kachi-ghani-mustard-oil" data-img="assets/product.png"></div>
-        <div class="reco-item" data-id="zaffran-ka-zaika-combo" data-img="assets/zaika-combo.png"></div>
-        <div class="reco-item" data-id="rooh-afza" data-img="assets/zaika-combo1.png"></div>
-        <div class="reco-item" data-id="haleem-masala" data-img="assets/product-khaalis-masala.png"></div>
-        <div class="reco-item" data-id="kachi-ghani-mustard-oil" data-img="assets/product.png"></div>
-        <div class="reco-item" data-id="zaffran-ka-zaika-combo" data-img="assets/zaika-combo.png"></div>
-        <div class="reco-item" data-id="rooh-afza" data-img="assets/zaika-combo1.png"></div>
-        <div class="reco-item" data-id="haleem-masala" data-img="assets/product-khaalis-masala.png"></div>
+        <div class="reco-item" data-id="kachi-ghani-mustard-oil" data-img="assets/product.png" data-hover="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&amp;width=300"></div>
+        <div class="reco-item" data-id="zaffran-ka-zaika-combo" data-img="assets/zaika-combo.png" data-hover="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&amp;width=300"></div>
+        <div class="reco-item" data-id="rooh-afza" data-img="assets/zaika-combo1.png" data-hover="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&amp;width=300"></div>
+        <div class="reco-item" data-id="haleem-masala" data-img="assets/product-khaalis-masala.png" data-hover="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&amp;width=300"></div>
+        <div class="reco-item" data-id="kachi-ghani-mustard-oil" data-img="assets/product.png" data-hover="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&amp;width=300"></div>
+        <div class="reco-item" data-id="zaffran-ka-zaika-combo" data-img="assets/zaika-combo.png" data-hover="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&amp;width=300"></div>
+        <div class="reco-item" data-id="rooh-afza" data-img="assets/zaika-combo1.png" data-hover="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&amp;width=300"></div>
+        <div class="reco-item" data-id="haleem-masala" data-img="assets/product-khaalis-masala.png" data-hover="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&amp;width=300"></div>
         <!-- <div class="reco-item" data-id="PRODUCT-ID" data-img="assets/NAYI-IMAGE.png" data-hover="assets/HOVER-IMAGE.png"></div> -->
       </div>
     </section>
@@ -1273,7 +1326,7 @@ body.cart-open .hm-toast{bottom:120px}
     var opts=p.variants.map(function(x,i){return '<option value="'+i+'">'+esc(x.label)+'</option>';}).join('');
     var url='product.html?id='+encodeURIComponent(p.id);
     return '<article class="product-card" data-id="'+p.id+'">'+
-      '<a class="product-card__visual'+(hover?' has-hover':'')+'" href="'+url+'"><span class="veg-badge" title="Vegetarian"></span><span class="discount">'+off(v)+'% OFF</span>'+
+      '<a class="product-card__visual'+(hover?' has-hover':'')+'"'+(hover?' style="--hover-bg:url(&quot;'+esc(hover)+'&quot;)"':'')+' href="'+url+'"><span class="veg-badge" title="Vegetarian"></span><span class="discount">'+off(v)+'% OFF</span>'+
       '<span class="wishlist" role="button" aria-label="Add to wishlist">'+ico.heart+'</span>'+
       '<img class="img-main" src="'+img+'" alt="'+esc(p.title)+'" loading="lazy">'+(hover?'<img class="img-hover" src="'+hover+'" alt="" aria-hidden="true" loading="lazy">':'')+'</a>'+
       '<div class="product-details"><div class="product-meta"><p class="product-type">'+p.type+'</p><div class="rating" aria-label="Rated '+p.rating+' out of 5"><span class="star">★</span> '+p.rating+' ('+p.reviews+')</div></div>'+
@@ -1532,6 +1585,48 @@ body.cart-open .hm-toast{bottom:120px}
       ? recoItems.map(function(el){var rp=BY_ID[el.getAttribute('data-id')];return rp?card(rp,el.getAttribute('data-img'),el.getAttribute('data-hover')):'';}).join('')
       : RECO_IDS.filter(function(x){return x!==p.id;}).map(function(x){return card(BY_ID[x]);}).join('');
     initGridSliders();
+
+    /* PRODUCT SECTION — har screen par khud adjust (resize / zoom / header change par dobara) */
+    (function(){
+      var pdp=$('.pdp'),info=$('.pi'),grid=$('.pdp__grid');if(!pdp||!info||!grid)return;
+      var raf=0;
+      function fit(){
+        raf=0;
+        var P=pdp.style;
+        if(window.innerWidth<901){
+          ['--pdp-h','--g-w','--t-w','--g-gap','--k'].forEach(function(v){P.removeProperty(v);});pdp.classList.remove('is-tight');
+          /* phone/tablet: image itni badi ki pehli screen mein image + naam + price dikhe */
+          var gm=$('.g-main'),price=$('.pi__price');if(!gm||!price)return;
+          var maxW=gm.parentNode.getBoundingClientRect().width,gh2=Math.min(maxW*1.02,620);
+          P.setProperty('--g-h',Math.round(gh2)+'px');
+          var over=price.getBoundingClientRect().bottom+window.scrollY+12-window.innerHeight;
+          if(over>0)P.setProperty('--g-h',Math.round(Math.max(200,gh2-over))+'px');
+          return;}
+        var top=Math.max(0,pdp.getBoundingClientRect().top+window.scrollY);
+        var screenH=Math.max(340,window.innerHeight-top);            /* header ke neeche bachi screen */
+        P.setProperty('--pdp-h',screenH+'px');
+        pdp.classList.toggle('is-short',screenH<480);   /* bahut chhoti screen: breadcrumb chhupao */
+        var cs=getComputedStyle(pdp),pad=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);
+        var cr=pdp.querySelector('.crumbs'),crH=cr?cr.offsetHeight+parseFloat(getComputedStyle(cr).marginBottom):0;
+        var availH=screenH-pad-crH;
+        /* width ki limit: image wala hissa page ka ~48% */
+        var pageW=Math.min(window.innerWidth-48,1200*1.35);
+        var k0=Math.max(.78,Math.min(1.35,availH/520));
+        var tW=Math.round(88*Math.min(1.2,Math.max(.75,k0))),gap=Math.round(12*Math.min(1.2,Math.max(.7,k0)));
+        var maxByW=(Math.min(pageW,1200*Math.max(1,k0))*0.48-tW-gap)/0.9;
+        var gh=Math.round(Math.max(240,Math.min(availH,maxByW)));
+        var k=Math.max(.7,Math.min(1.35,gh/455));
+        P.setProperty('--k',k.toFixed(3));P.setProperty('--t-w',tW+'px');P.setProperty('--g-gap',gap+'px');
+        P.setProperty('--g-h',gh+'px');P.setProperty('--g-w',Math.round(gh*0.9)+'px');
+        /* text image se lamba ho gaya to thoda chhota karo */
+        pdp.classList.remove('is-tight');
+        var tries=0;while(info.offsetHeight>availH&&tries<8){k-=.04;P.setProperty('--k',Math.max(.6,k).toFixed(3));if(tries===1)pdp.classList.add('is-tight');tries++;}
+      }
+      function later(){if(!raf)raf=requestAnimationFrame(fit);}
+      fit();window.addEventListener('resize',later);window.addEventListener('load',fit);
+      if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+      if('ResizeObserver' in window){var hdr=document.querySelector('.store-header');if(hdr)new ResizeObserver(later).observe(hdr);}
+    })();
 
     /* mobile sticky buy bar – show when main buttons scroll out of view */
     var sb=$('.sticky-buy'),row=$('.buy-row');
