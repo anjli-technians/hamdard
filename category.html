@@ -88,7 +88,7 @@
       .category-card small{display:block;width:84px;margin:-10px auto 0;padding:4px 0;font-size:9px;line-height:12px;border-radius:10px;position:relative}
       .product-grid{gap:33px}
       .product-card{border:1px solid #111;border-radius:4px}
-      .product-card__visual{height:auto;aspect-ratio:273/223;border-bottom:1px solid #111}
+      .product-card__visual{height:auto;aspect-ratio:223/223;border-bottom:1px solid #111}
       .product-card__visual img{height:85%;width:85%}
       .veg-badge{left:13px;top:13px;width:16px;height:16px;border-width:1.5px}
       .discount{right:15px;top:13px;border-radius:5px;padding:0;width:62px;height:22px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500}
@@ -527,15 +527,10 @@
   </style>
 
 <style id="hm-image-fit-fix">
-/* FIX: product card images poori fit hon, crop ya bahar nikalna band */
-.product-card__visual{position:relative!important;overflow:hidden!important;background:#fff!important}
-.product-card__visual img,
-.product-card__visual img.img-main,
-.product-card__visual img.img-hover{
-  width:100%!important;height:100%!important;
-  max-width:100%!important;max-height:100%!important;
-  object-fit:contain!important;object-position:center center!important;display:block}
-.product-card__visual.has-hover img.img-hover{position:absolute!important;top:0;left:0}
+/* main product image: poori dikhe (contain) | hover image: poore card par, left-right gap nahi (cover) */
+.product-card__visual{position:relative!important;overflow:hidden!important;background:#fff!important;isolation:isolate}
+.product-card__visual img.img-main{width:100%!important;height:100%!important;max-width:100%!important;max-height:100%!important;object-fit:contain!important;object-position:center center!important;display:block}
+.product-card__visual img.img-hover{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;margin:0!important;object-fit:cover!important;object-position:center center!important;mix-blend-mode:normal!important;transform:none!important;display:block}
 .product-card__visual .veg-badge,.product-card__visual .discount{z-index:3}
 .product-card .wishlist{z-index:4}
 </style>
@@ -1085,6 +1080,17 @@ body.hm-edit .m-float{display:none}
 /* bottom quality section (home page wala) — same spacing on these pages */
 .page-content>.quality{margin-top:0}
   </style>
+<style id="hm-hover-fit">
+/* HOVER IMAGE: kabhi kategi nahi (contain). Bachi jagah usi image ke blur se bharti hai, taaki box poora bhara dikhe */
+.product-card__visual img.img-hover{object-fit:contain!important;object-position:center center!important;background:transparent!important;z-index:2!important}
+.product-card__visual.has-hover::before{content:"";position:absolute;inset:-12%;z-index:1;background-image:var(--hover-bg);background-size:cover;background-position:center;filter:blur(16px) saturate(1.1);transform:scale(1.05);opacity:0;transition:opacity .3s ease;pointer-events:none}
+@media(hover:hover){
+  .product-card:hover .product-card__visual.has-hover::before,
+  .product-card__visual.has-hover:hover::before{opacity:1}
+}
+.product-card__visual .veg-badge,.product-card__visual .discount{z-index:3!important}
+.product-card .wishlist{z-index:4!important}
+</style>
 </head>
 <body data-page="category">
   <div class="announcement"><div class="announcement__inner">
@@ -1161,12 +1167,12 @@ body.hm-edit .m-float{display:none}
       <div class="listing-grid" id="listing-grid" style="margin-top:18px">
         <!-- ===== Hamdard Kachi Ghani Mustard Oil ===== -->
         <article class="product-card" data-id="kachi-ghani-mustard-oil" data-collection="Mustard Oil" data-type="Bottle" data-stock="in" data-sold="1600" data-rating="4.5" data-new="0">
-          <a class="product-card__visual" href="product.html?id=kachi-ghani-mustard-oil">
+          <a class="product-card__visual has-hover" href="product.html?id=kachi-ghani-mustard-oil">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">25% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Hamdard Kachi Ghani Mustard Oil" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">EDIBLE OIL</p><div class="rating"><span class="star">★</span> 4.5 (15.03K)</div></div>
@@ -1180,12 +1186,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Hamdard Select Mustard Oil ===== -->
         <article class="product-card" data-id="select-mustard-oil" data-collection="Mustard Oil" data-type="Bottle" data-stock="in" data-sold="760" data-rating="4.4" data-new="1">
-          <a class="product-card__visual" href="product.html?id=select-mustard-oil">
+          <a class="product-card__visual has-hover" href="product.html?id=select-mustard-oil">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">20% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Hamdard Select Mustard Oil" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">EDIBLE OIL</p><div class="rating"><span class="star">★</span> 4.4 (3.4K)</div></div>
@@ -1199,12 +1205,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Hamdard Olive Pomace Oil ===== -->
         <article class="product-card" data-id="olive-pomace-oil" data-collection="Olive Pomace Oil" data-type="Bottle" data-stock="in" data-sold="690" data-rating="4.7" data-new="1">
-          <a class="product-card__visual" href="product.html?id=olive-pomace-oil">
+          <a class="product-card__visual has-hover" href="product.html?id=olive-pomace-oil">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">17% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Hamdard Olive Pomace Oil" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">EDIBLE OIL</p><div class="rating"><span class="star">★</span> 4.7 (980)</div></div>
@@ -1218,12 +1224,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Hamdard Kachi Ghani Mustard Oil 5L Jar ===== -->
         <article class="product-card" data-id="kachi-ghani-mustard-oil-5l" data-collection="Mustard Oil" data-type="Jar" data-stock="in" data-sold="820" data-rating="4.6" data-new="0">
-          <a class="product-card__visual" href="product.html?id=kachi-ghani-mustard-oil-5l">
+          <a class="product-card__visual has-hover" href="product.html?id=kachi-ghani-mustard-oil-5l">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">22% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Hamdard Kachi Ghani Mustard Oil 5L Jar" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">EDIBLE OIL</p><div class="rating"><span class="star">★</span> 4.6 (2.1K)</div></div>
@@ -1237,12 +1243,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Hamdard Kachi Ghani Mustard Oil Pouch ===== -->
         <article class="product-card" data-id="kachi-ghani-pouch" data-collection="Mustard Oil" data-type="Pouch" data-stock="in" data-sold="540" data-rating="4.3" data-new="0">
-          <a class="product-card__visual" href="product.html?id=kachi-ghani-pouch">
+          <a class="product-card__visual has-hover" href="product.html?id=kachi-ghani-pouch">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">23% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Hamdard Kachi Ghani Mustard Oil Pouch" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">EDIBLE OIL</p><div class="rating"><span class="star">★</span> 4.3 (1.2K)</div></div>
@@ -1256,12 +1262,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Kachi Ghani Mustard Oil Combo ===== -->
         <article class="product-card" data-id="mustard-oil-combo" data-collection="Combos" data-type="Bottle" data-stock="in" data-sold="480" data-rating="4.8" data-new="0">
-          <a class="product-card__visual" href="product.html?id=mustard-oil-combo">
+          <a class="product-card__visual has-hover" href="product.html?id=mustard-oil-combo">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">29% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Kachi Ghani Mustard Oil Combo" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">COMBO PACK</p><div class="rating"><span class="star">★</span> 4.8 (760)</div></div>
@@ -1275,12 +1281,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Hamdard Olive Pomace Oil Tin ===== -->
         <article class="product-card" data-id="olive-pomace-oil-tin" data-collection="Olive Pomace Oil" data-type="Tin" data-stock="out" data-sold="210" data-rating="4.6" data-new="0">
-          <a class="product-card__visual" href="product.html?id=olive-pomace-oil-tin">
+          <a class="product-card__visual has-hover" href="product.html?id=olive-pomace-oil-tin">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">18% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Hamdard Olive Pomace Oil Tin" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">EDIBLE OIL</p><div class="rating"><span class="star">★</span> 4.6 (410)</div></div>
@@ -1294,12 +1300,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Hamdard Select Mustard Oil Pouch ===== -->
         <article class="product-card" data-id="select-mustard-pouch" data-collection="Mustard Oil" data-type="Pouch" data-stock="out" data-sold="300" data-rating="4.2" data-new="0">
-          <a class="product-card__visual" href="product.html?id=select-mustard-pouch">
+          <a class="product-card__visual has-hover" href="product.html?id=select-mustard-pouch">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">19% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Hamdard Select Mustard Oil Pouch" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">EDIBLE OIL</p><div class="rating"><span class="star">★</span> 4.2 (640)</div></div>
@@ -1313,12 +1319,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Zaffran Ka Zaika Combo ===== -->
         <article class="product-card" data-id="zaffran-ka-zaika-combo" data-collection="Combos" data-type="Pack" data-stock="in" data-sold="520" data-rating="4.9" data-new="0">
-          <a class="product-card__visual" href="product.html?id=zaffran-ka-zaika-combo">
+          <a class="product-card__visual has-hover" href="product.html?id=zaffran-ka-zaika-combo">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">19% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Zaffran Ka Zaika Combo" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">COMBO PACK</p><div class="rating"><span class="star">★</span> 4.9 (102)</div></div>
@@ -1332,12 +1338,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Rooh Afza No Added Sugar ===== -->
         <article class="product-card" data-id="rooh-afza" data-collection="Beverages" data-type="Bottle" data-stock="in" data-sold="1400" data-rating="4.9" data-new="0">
-          <a class="product-card__visual" href="product.html?id=rooh-afza">
+          <a class="product-card__visual has-hover" href="product.html?id=rooh-afza">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">20% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Rooh Afza No Added Sugar" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">BEVERAGES</p><div class="rating"><span class="star">★</span> 4.9 (102)</div></div>
@@ -1351,12 +1357,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Hamdard Khaalis Haleem Masala ===== -->
         <article class="product-card" data-id="haleem-masala" data-collection="Spices" data-type="Pack" data-stock="in" data-sold="610" data-rating="4.9" data-new="0">
-          <a class="product-card__visual" href="product.html?id=haleem-masala">
+          <a class="product-card__visual has-hover" href="product.html?id=haleem-masala">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">19% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Hamdard Khaalis Haleem Masala" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">BLENDED SPICES</p><div class="rating"><span class="star">★</span> 4.9 (102)</div></div>
@@ -1370,12 +1376,12 @@ body.hm-edit .m-float{display:none}
         </article>
         <!-- ===== Hamdard Khaalis Cumin (Jeera) ===== -->
         <article class="product-card" data-id="cumin-jeera" data-collection="Spices" data-type="Pack" data-stock="in" data-sold="900" data-rating="4.9" data-new="0">
-          <a class="product-card__visual" href="product.html?id=cumin-jeera">
+          <a class="product-card__visual has-hover" href="product.html?id=cumin-jeera">
             <span class="veg-badge" title="Vegetarian"></span>
             <span class="discount">15% OFF</span>
             <span class="wishlist" role="button" aria-label="Add to wishlist"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg></span>
             <img class="img-main" src="assets/cumin.png" alt="Hamdard Khaalis Cumin (Jeera)" loading="lazy">
-            <!-- hover image (optional): <img class="img-hover" src="assets/HOVER.png" alt=""> + upar <a> mein class "has-hover" jodein -->
+            <img class="img-hover" src="https://myhamdardstore.com/cdn/shop/files/SRA-41080x1080_5e819e2d-64b0-4c26-a0ac-4ac56aeb9faa.jpg?v=1782795061&width=300" alt="" aria-hidden="true" loading="lazy">
           </a>
           <div class="product-details">
             <div class="product-meta"><p class="product-type">WHOLE SPICES</p><div class="rating"><span class="star">★</span> 4.9 (102)</div></div>
@@ -1613,7 +1619,9 @@ body.hm-edit .m-float{display:none}
   var banner=$('#cat-banner-img');if(banner)banner.dataset.orig=banner.getAttribute('src');
   cards.forEach(function(c){var m=c.querySelector('.img-main');m.dataset.orig=m.getAttribute('src');var h=c.querySelector('.img-hover');c.dataset.origHover=h?h.getAttribute('src'):'';});
   $$('#fbt-items [data-id]').forEach(function(el){el.dataset.origImg=el.dataset.img;});
-  function setHover(c,src){var a=c.querySelector('.product-card__visual'),h=c.querySelector('.img-hover');
+  function hoverBg(a,src){if(src)a.style.setProperty('--hover-bg','url("'+String(src).replace(/"/g,'%22')+'")');else a.style.removeProperty('--hover-bg');}
+  cards.forEach(function(c){var h=c.querySelector('.img-hover');if(h)hoverBg(c.querySelector('.product-card__visual'),h.getAttribute('src'));});
+  function setHover(c,src){var a=c.querySelector('.product-card__visual'),h=c.querySelector('.img-hover');hoverBg(a,src);
     if(src){if(!h){h=document.createElement('img');h.className='img-hover';h.alt='';h.setAttribute('aria-hidden','true');a.appendChild(h);}h.src=src;a.classList.add('has-hover');}
     else{if(h)h.remove();a.classList.remove('has-hover');}}
   function applyEdits(){
@@ -1729,6 +1737,44 @@ body.hm-edit .m-float{display:none}
       })();
   })();
 })();
+</script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
 </script>
 </body>
 </html>
