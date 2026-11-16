@@ -544,18 +544,23 @@
       .hero-track>.hero-slide:nth-child(3) .hero-copy h1,
       .hero-track>.hero-slide:nth-child(4) .hero-copy h1{font-size:3.2vw;line-height:1.05}
     }
-    /* PHONE: heading → line → Shop Now ek ke neeche ek, beech me (reference jaisa) */
+    /* PHONE: reference jaisa — banner lagbhag square, logo upar corners me,
+       uske neeche heading → line → Shop Now beech me; sab banner height (--hh) ke saath scale */
     @media(max-width:700px){
-      .hero-slide--stack .hero-copy{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:15% 18px 0;text-align:center}
-      .hero-slide--stack .hero-copy h1,
-      .hero-slide--stack .hero-copy p,
-      .hero-slide--stack .hero-shop-button{position:static;transform:none;left:auto;top:auto}
-      .hero-slide--stack .hero-copy h1{width:100%;font-size:clamp(26px,8.6vw,40px);line-height:1.05;letter-spacing:-.5px;margin:0 0 10px}
-      .hero-slide--stack .hero-copy h1 br{display:inline}
-      .hero-slide--stack .hero-copy p{width:100%;max-width:300px;padding:0;font-size:clamp(12px,3.5vw,15px);line-height:1.35;margin:0 0 14px}
-      .hero-slide--stack .hero-shop-button{font-size:13px;padding:9px 26px;white-space:nowrap}
-      /* offer badge: text se hat ke right side */
-      .hero-slide--stack .hero-mobile-badge{left:auto;right:4%;top:50%;width:26%}
+      .hero{--hh:var(--hero-h,105vw)}
+      .hero-slide .hero-mobile-bg{object-position:center center}
+      /* reference jaisa: laal Shop Now button */
+      .hero-slide .hero-shop-button{background:var(--red);color:#fff;box-shadow:0 2px 6px #0003}
+      .hero-slide .hero-copy{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:calc(var(--hh) * .17) 16px 0;text-align:center}
+      .hero-slide .hero-copy h1,
+      .hero-slide .hero-copy p,
+      .hero-slide .hero-shop-button{position:static;transform:none;left:auto;top:auto}
+      .hero-slide .hero-copy h1{width:100%;font-size:min(8.6vw,calc(var(--hh) * .07));line-height:1.05;letter-spacing:-.5px;margin:0 0 calc(var(--hh) * .018)}
+      .hero-slide .hero-copy h1 br{display:inline}
+      .hero-slide .hero-copy p{width:100%;max-width:min(320px,88%);padding:0;font-size:max(10px,min(3.6vw,calc(var(--hh) * .032)));line-height:1.35;margin:0 0 calc(var(--hh) * .028)}
+      .hero-slide .hero-shop-button{white-space:nowrap;font-size:max(11px,min(3.6vw,calc(var(--hh) * .032)));padding:calc(var(--hh) * .016) calc(var(--hh) * .05);border-radius:4px}
+      /* offer badge: right side, button ke neeche wali line par (reference jaisa) */
+      .hero-slide .hero-mobile-badge{left:auto;right:3%;top:52%;transform:none;width:min(26%,calc(var(--hh) * .25))}
     }
   </style>
 </head>
@@ -722,11 +727,12 @@
       function sizeHero(){
         var w=window.innerWidth;if(w===lastW)return;lastW=w;
         if(w>700){hero.style.removeProperty('--hero-h');return;}
-        var top=hero.getBoundingClientRect().top+window.scrollY;
-        var h=window.innerHeight-top-20;
-        hero.style.setProperty('--hero-h',Math.max(h,360)+'px');
+        /* phone banner = reference jaisa lagbhag square.
+           Mobile images (banner-mob1-4.jpg) isi shape mein banayein: 1080 x 1134 px — tab kuch nahi katega */
+        var MOB_BANNER_RATIO=1.05;
+        hero.style.setProperty('--hero-h',Math.round(w*MOB_BANNER_RATIO)+'px');
       }
-      sizeHero();window.addEventListener('resize',sizeHero);window.addEventListener('orientationchange',function(){lastW=0;setTimeout(sizeHero,200);});
+      sizeHero();window.addEventListener('resize',sizeHero);hero.querySelectorAll('.hero-mobile-bg').forEach(function(im){if(!im.complete)im.addEventListener('load',function(){lastW=0;sizeHero();});});window.addEventListener('load',function(){lastW=0;sizeHero();});window.addEventListener('orientationchange',function(){lastW=0;setTimeout(sizeHero,200);});
 
       /* ===== products =====
          image = main image, hover = image shown on hover (optional — leave out and no hover swap happens) */
