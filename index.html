@@ -562,6 +562,23 @@
       /* offer badge: right side, button ke neeche wali line par (reference jaisa) */
       .hero-slide .hero-mobile-badge{left:auto;right:3%;top:52%;transform:none;width:min(26%,calc(var(--hh) * .25))}
     }
+
+    /* =====================================================================
+       PHONE: Benefits section (reference jaisa) — 2x2, beech me chhoti khadi line
+       ===================================================================== */
+    @media(max-width:700px){
+      .benefits{display:grid;grid-template-columns:1fr 1fr;row-gap:calc(14px + 1.5vw);column-gap:0;padding:calc(16px + 2vw) 4vw;margin:0;height:auto;background:#fff5f5;border:0}
+      .benefit{position:relative;display:flex;align-items:center;justify-content:flex-start;gap:2.6vw;padding:0 1vw 0 3vw;min-width:0;height:auto;border:0!important}
+      .benefit:nth-child(odd)::after{content:"";position:absolute;right:0;top:50%;transform:translateY(-50%);width:1.5px;height:62%;background:#e8a9ad}
+      .benefit:nth-child(even){padding-left:4vw;padding-right:0}
+      .benefit>div{min-width:0}
+      .benefit__icon img{height:clamp(22px,7vw,32px);width:auto;max-width:9vw;object-fit:contain}
+      .benefit strong{white-space:nowrap;font-size:clamp(11.5px,3.4vw,14.5px);font-weight:600;line-height:1.2;color:var(--red)}
+      .benefit small{white-space:nowrap;font-size:clamp(9px,2.55vw,11.5px);font-weight:500;line-height:1.25;margin-top:2px;color:var(--red)}
+    }
+    @media(max-width:340px){
+      .benefit{gap:2vw}.benefit strong{font-size:11px}.benefit small{font-size:8.5px}
+    }
   </style>
 </head>
 <body>
