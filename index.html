@@ -524,6 +524,39 @@
     @media(max-width:700px){
       .m-sub a.m-row{cursor:pointer}
     }
+
+    /* =====================================================================
+       HERO text fix — text logo par na chadhe
+       ===================================================================== */
+    /* DESKTOP: banner 3 & 4 (Honey / Saffron) — text logo ke neeche, badge se pehle khatam */
+    @media(min-width:1101px){
+      .hero-track>.hero-slide:nth-child(3) .hero-copy,
+      .hero-track>.hero-slide:nth-child(4) .hero-copy{top:31%;width:36%}
+      .hero-track>.hero-slide:nth-child(3) .hero-copy h1,
+      .hero-track>.hero-slide:nth-child(4) .hero-copy h1{font-size:3.3vw;line-height:1.05;margin:0 0 1.2vw}
+      .hero-track>.hero-slide:nth-child(3) .hero-copy p,
+      .hero-track>.hero-slide:nth-child(4) .hero-copy p{max-width:30vw;margin:0 0 1.4vw}
+    }
+    /* TABLET (701–1100): same idea, chhote size me */
+    @media(min-width:701px) and (max-width:1100px){
+      .hero-track>.hero-slide:nth-child(3) .hero-copy,
+      .hero-track>.hero-slide:nth-child(4) .hero-copy{top:30%;width:36%}
+      .hero-track>.hero-slide:nth-child(3) .hero-copy h1,
+      .hero-track>.hero-slide:nth-child(4) .hero-copy h1{font-size:3.2vw;line-height:1.05}
+    }
+    /* PHONE: heading → line → Shop Now ek ke neeche ek, beech me (reference jaisa) */
+    @media(max-width:700px){
+      .hero-slide--stack .hero-copy{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding:15% 18px 0;text-align:center}
+      .hero-slide--stack .hero-copy h1,
+      .hero-slide--stack .hero-copy p,
+      .hero-slide--stack .hero-shop-button{position:static;transform:none;left:auto;top:auto}
+      .hero-slide--stack .hero-copy h1{width:100%;font-size:clamp(26px,8.6vw,40px);line-height:1.05;letter-spacing:-.5px;margin:0 0 10px}
+      .hero-slide--stack .hero-copy h1 br{display:inline}
+      .hero-slide--stack .hero-copy p{width:100%;max-width:300px;padding:0;font-size:clamp(12px,3.5vw,15px);line-height:1.35;margin:0 0 14px}
+      .hero-slide--stack .hero-shop-button{font-size:13px;padding:9px 26px;white-space:nowrap}
+      /* offer badge: text se hat ke right side */
+      .hero-slide--stack .hero-mobile-badge{left:auto;right:4%;top:50%;width:26%}
+    }
   </style>
 </head>
 <body>
