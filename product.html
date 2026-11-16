@@ -957,6 +957,89 @@ body.cart-open{overflow:hidden}
   body.page-cart .m-float{display:none}
 }
 
+/* =====================================================================
+   CART DRAWER — design (Shopping_card_Page) match
+   ===================================================================== */
+.cart-drawer__box{width:min(440px,100vw)}
+.cart{font-family:'Poppins',sans-serif;color:#000}
+.cart__head{gap:14px;padding:22px 22px 18px}
+.cart__head svg.c-ico{width:26px;height:26px;stroke-width:2.2}
+.cart__head h2{font-size:20px;font-weight:500;letter-spacing:-.2px}
+.cart__head .x-btn svg{width:22px;height:22px;stroke:#000;stroke-width:2.4}
+.cart__scroll{padding:0 14px 18px}
+/* freebies */
+.free{background:#fdf0f0;border-radius:14px;padding:22px 14px 16px;margin-bottom:22px}
+.free__track{height:26px;margin:0 6px 18px 0}
+.free__line{height:7px;margin-top:-3.5px;background:#e4e4e8}
+.free__dot{width:24px;height:24px;margin:-12px 0 0 -12px;background:#fff;box-shadow:0 1px 6px #00000024}
+.free__dot svg{width:12px;height:12px;stroke-width:2.2}
+.free__dot.on{width:26px;height:26px;margin:-13px 0 0 -13px;background:var(--red);box-shadow:0 1px 6px #ed1c2b55}
+.free__dot small{display:none}
+.free p{gap:9px;margin:9px 0 0;font-size:13px;line-height:1.35;color:#111}
+.free p svg{width:13px;height:13px;margin-top:3px}
+.free b{font-weight:500}
+/* cart item */
+.c-item{grid-template-columns:108px minmax(0,1fr) auto;gap:14px;border:1px solid #000;border-radius:14px;padding:10px 12px 10px 10px;margin-bottom:12px}
+.c-item__img{border-radius:8px;background:#fcf1f2;aspect-ratio:auto;height:104px}
+.c-item__img img{width:80%;height:88%}
+.c-item h3{margin:10px 0 2px;font-size:13.5px;font-weight:600;line-height:1.3;color:#000}
+.c-item .c-size{font-size:10.5px;color:#6b6b6b;margin:0 0 12px}
+.c-item .c-price{font-size:16px;font-weight:600;margin:0 0 12px;color:var(--red)}
+.c-item .qty{height:22px;border:1px solid #000;border-radius:4px;background:#fdf6f6;width:62px;justify-content:space-between}
+.c-item .qty button{width:20px;font-size:12px;line-height:1;color:#000}
+.c-item .qty input{width:18px;font-size:10px;color:#000}
+.c-del{width:30px;height:30px;margin-top:4px}
+.c-del svg,.c-del img{width:17px;height:auto}
+/* frequently bought together */
+.fbt{background:#fdf0f0;border-radius:14px;padding:14px 10px 12px;margin-top:4px}
+.fbt__head{gap:10px;margin:2px 6px 12px}
+.fbt__head .bag{width:20px;height:18px;border-radius:3px}
+.fbt__head .bag svg{width:11px;height:8px}
+.fbt__head h3{font-size:12.5px;font-weight:600;color:#000}
+.fbt__head a{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;color:#000}
+.fbt__head a i{color:var(--red);font-style:normal;font-weight:700;font-size:11px}
+.fbt__list{grid-auto-columns:calc(50% - 4px);gap:8px}
+.fbt-card{border-radius:10px;padding:10px 8px 8px;gap:8px}
+.fbt-card__row{grid-template-columns:58px minmax(0,1fr);gap:8px;align-items:center}
+.fbt-card__row img{width:58px;height:62px}
+.fbt-card h4{font-size:10px;font-weight:400;line-height:1.35;color:#000;margin:0 0 4px}
+.fbt-card strong{font-size:10.5px;font-weight:600}
+.fbt-card button{height:26px;border:1px solid var(--red);border-radius:5px;background:#fff;color:#000;font-size:11px;gap:6px}
+.fbt-card button svg{width:13px;height:13px;stroke:#000}
+.fbt-card button:hover svg{stroke:#fff}
+/* footer */
+.cart__foot{border-top:0;padding-top:0}
+.cart__foot:before{content:"";display:block;height:1px;background:#d4d4d4;margin:0 14px}
+.cart__sub{padding:16px 22px 12px}
+.cart__sub span{font-size:20px;font-weight:600;color:#000}
+.cart__sub strong{font-size:21px;font-weight:600}
+.cart__pin{background:#faf8f6;padding:12px 16px;font-size:10.5px;color:#000}
+.cart__pin svg{width:11px;height:11px}
+.cart__pin button.link{font-size:10.5px;font-weight:500}
+.cart__checkout{width:calc(100% - 44px);margin:6px 22px calc(18px + env(safe-area-inset-bottom,0px));height:56px;border-radius:40px;font-size:19px;font-weight:600}
+/* empty cart */
+.cart-empty{padding:14px 10px 24px}
+.cart-empty svg{width:54px;height:54px}
+.cart-empty h3{font-size:16px;margin:8px 0 4px}
+.cart-empty p{font-size:12px;margin:0 0 14px}
+.cart-empty a{height:40px;padding:0 24px;font-size:13px}
+@media(max-width:700px){
+  .cart-drawer__box{width:100vw}
+  .cart__head{padding:16px 16px 14px}
+  .cart__head h2{font-size:19px}
+  .cart__scroll{padding:0 12px 14px}
+  .c-item{grid-template-columns:100px minmax(0,1fr) auto;gap:12px}
+  .c-item__img{height:96px}
+  .c-item h3{font-size:13px;margin-top:6px}
+  .c-item .c-price{font-size:15px}
+  .fbt__list{grid-auto-columns:calc(50% - 4px)}
+  .cart__sub{padding:14px 18px 10px}
+  .cart__sub span{font-size:19px}
+  .cart__sub strong{font-size:20px}
+  .cart__checkout{width:calc(100% - 32px);margin:6px 16px calc(14px + env(safe-area-inset-bottom,0px));height:52px;font-size:18px}
+}
+
+body.cart-open .hm-toast{bottom:120px}
 /* bottom quality section (home page wala) — same spacing on these pages */
 .page-content>.quality{margin-top:0}
   </style>
@@ -1081,6 +1164,16 @@ body.cart-open{overflow:hidden}
       </div>
     </section>
 
+      <!-- ===================== CART: FREQUENTLY BOUGHT TOGETHER =====================
+           Cart drawer mein dikhne wale suggestion products. Har line = ek product.
+           ============================================================================= -->
+      <div id="fbt-items" hidden>
+        <div data-id="honeydew-honey" data-title="Hamdard Honey- Honeydew &amp; Blossom Honey" data-img="assets/honey.png" data-label="50 g" data-price="33.25" data-old="40"></div>
+        <div data-id="non-roasted-vermicelli" data-title="Hamdard Khaalis Non-Roasted Shortcut Vermicelli" data-img="assets/Vermicelli.png" data-label="Pack of 12" data-price="1235" data-old="1440"></div>
+        <div data-id="cumin-jeera" data-title="Hamdard Khaalis Cumin (Jeera)" data-img="assets/product-cumin-whole.png" data-label="50 G" data-price="30.6" data-old="36"></div>
+        <div data-id="rooh-afza" data-title="Rooh Afza No Added Sugar" data-img="assets/product-rooh-afza-no-sugar.png" data-label="750 ml" data-price="120" data-old="150"></div>
+      </div>
+
     <div class="sticky-buy" aria-label="Quick buy">
       <div class="sb-price"><strong id="sb-price"></strong><small id="sb-label"></small></div>
       <button type="button" class="btn-red" data-buy="cart"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/></svg>Add to Cart</button>
@@ -1101,6 +1194,7 @@ body.cart-open{overflow:hidden}
   'use strict';
   var PAGE=document.body.getAttribute('data-page')||'';
   var FALLBACK_IMG='assets/product-mustard-oil-1l.png';
+  var DELETE_ICON='delete.png';   /* cart ka delete icon — path yahan badlein */
 
   /* ---------- PRODUCT DATA (replace with real catalogue / Shopify data) ---------- */
   var PRODUCTS=[
@@ -1152,7 +1246,11 @@ body.cart-open{overflow:hidden}
   function $(s,r){return (r||document).querySelector(s);}
   function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
   /* missing image -> fallback (so layout never breaks while assets are being added) */
-  document.addEventListener('error',function(e){var t=e.target;if(t&&t.tagName==='IMG'&&!t.dataset.fb&&t.src.indexOf(FALLBACK_IMG)===-1){t.dataset.fb='1';t.src=FALLBACK_IMG;}},true);
+  /* image na mile -> FALLBACK_IMG; woh bhi na mile -> halka placeholder; icon na mile -> SVG dustbin */
+  var PLACEHOLDER='data:image/svg+xml,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80"><rect width="80" height="80" rx="8" fill="#fcf1f2"/><path d="M26 54l10-12 8 9 6-7 8 10z" fill="#f2c4c8"/><circle cx="50" cy="30" r="5" fill="#f2c4c8"/></svg>');
+  document.addEventListener('error',function(e){var t=e.target;if(!t||t.tagName!=='IMG'||t.src.indexOf('data:')===0)return;
+    if(t.hasAttribute('data-icon')){var sp=document.createElement('span');sp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>';t.replaceWith(sp.firstChild);return;}
+    if(!t.dataset.fb&&t.src.indexOf(FALLBACK_IMG)===-1){t.dataset.fb='1';t.src=FALLBACK_IMG;}else{t.dataset.fb='2';t.src=PLACEHOLDER;}},true);
 
   var toastEl;
   function toast(msg){if(!toastEl){toastEl=document.createElement('div');toastEl.className='hm-toast';toastEl.setAttribute('role','status');document.body.appendChild(toastEl);}toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastEl._t);toastEl._t=setTimeout(function(){toastEl.classList.remove('show');},1800);}
@@ -1161,7 +1259,7 @@ body.cart-open{overflow:hidden}
     cart:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/></svg>',
     gift:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8M7.5 8a2.5 2.5 0 1 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 1 1 0 5"/></svg>',
     heart:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 0 0-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 0 0 0-7.8z"/></svg>',
-    trash:'<img src="assets/icon-delete.png" alt="" width="19" height="20">',
+    trash:'<img src="'+DELETE_ICON+'" alt="" width="17" height="18" data-icon>',
     tag:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4zM7.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',
     giftDot:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8M7.5 8a2.5 2.5 0 1 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 1 1 0 5"/></svg>',
     x:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>',
@@ -1193,45 +1291,47 @@ body.cart-open{overflow:hidden}
   document.addEventListener('click',function(e){var w=e.target.closest('.wishlist');if(!w)return;e.preventDefault();e.stopPropagation();var on=w.classList.toggle('on');w.querySelector('svg').style.fill=on?'#ed1c2b':'none';w.querySelector('svg').style.stroke=on?'#ed1c2b':'#111';toast(on?'Added to wishlist':'Removed from wishlist');});
 
   /* =====================================================================
-     CART STORE (localStorage, shared by all pages)
+     CART — category page jaisa (item ki saari info cart mein; dono pages ka ek hi cart)
      ===================================================================== */
-  var KEY='hm_cart_v1',mem=null;
-  function load(){try{var r=JSON.parse(localStorage.getItem(KEY)||'null');if(Array.isArray(r))return r;}catch(_){}return mem||[{id:'kachi-ghani-mustard-oil',v:0,qty:1}];}
-  function save(items){mem=items;try{localStorage.setItem(KEY,JSON.stringify(items));}catch(_){}}
-  var items=load().filter(function(i){return BY_ID[i.id]&&BY_ID[i.id].variants[i.v];});
+  var KEY='hm_cart_v2',mem=[];
+  function load(){try{var r=JSON.parse(localStorage.getItem(KEY)||'null');if(Array.isArray(r))return r;}catch(_){}return mem;}
+  function save(){mem=items;try{localStorage.setItem(KEY,JSON.stringify(items));}catch(_){}}
+  var items=load().filter(function(i){return i&&i.id&&i.title&&!isNaN(i.price);});
   function count(){return items.reduce(function(s,i){return s+i.qty;},0);}
-  function subtotal(){return items.reduce(function(s,i){return s+BY_ID[i.id].variants[i.v].price*i.qty;},0);}
-  function addItem(id,v,qty){v=v||0;qty=qty||1;var f=items.filter(function(i){return i.id===id&&i.v===v;})[0];if(f)f.qty=Math.min(99,f.qty+qty);else items.unshift({id:id,v:v,qty:qty});save(items);renderAll();}
-  function setQty(idx,q){if(q<1){items.splice(idx,1);}else items[idx].qty=Math.min(99,q);save(items);renderAll();}
+  function subtotal(){return items.reduce(function(s,i){return s+i.price*i.qty;},0);}
+  function addItem(it,qty){var f=items.filter(function(i){return i.id===it.id&&i.label===it.label;})[0];if(f)f.qty=Math.min(99,f.qty+(qty||1));else{it.qty=qty||1;items.unshift(it);}save();renderAll();}
+  function setQty(idx,q){if(q<1)items.splice(idx,1);else items[idx].qty=Math.min(99,q);save();renderAll();}
+  function itemFromCard(c){var p=BY_ID[c.dataset.id],sel=c.querySelector('.size-select'),v=p.variants[sel?+sel.value:0]||p.variants[0];
+    return {id:p.id,title:p.title,image:c.querySelector('.img-main').getAttribute('src'),url:'product.html?id='+encodeURIComponent(p.id),label:v.label,price:v.price};}
 
   function freebieHTML(sub){
     var unlocked=0,next=null;TIERS.forEach(function(t){if(sub>=t.at)unlocked=t.free;else if(!next)next=t;});
-    var stops=[0,40,68,96],amts=[0].concat(TIERS.map(function(t){return t.at;}));var pct=96;
-    for(var k=0;k<amts.length-1;k++){if(sub<amts[k+1]){pct=stops[k]+(sub-amts[k])/(amts[k+1]-amts[k])*(stops[k+1]-stops[k]);break;}}
-    var dots=TIERS.map(function(t,k){return '<span class="free__dot'+(sub>=t.at?' on':'')+'" style="left:'+stops[k+1]+'%" title="'+t.free+' freebies at '+rupee(t.at)+'">'+ico.giftDot+'<small>'+rupee(t.at)+'</small></span>';}).join('');
+    var stops=[0,40,68,96],amts=[0].concat(TIERS.map(function(t){return t.at;})),p=96;
+    for(var k=0;k<amts.length-1;k++){if(sub<amts[k+1]){p=stops[k]+(sub-amts[k])/(amts[k+1]-amts[k])*(stops[k+1]-stops[k]);break;}}
+    var dots=TIERS.map(function(t,k){return '<span class="free__dot'+(sub>=t.at?' on':'')+'" style="left:'+stops[k+1]+'%">'+ico.giftDot+'</span>';}).join('');
     var lines='';
     if(unlocked)lines+='<p>'+ico.tag+'<span>You just Unlocked <b>'+unlocked+' Freebies</b></span></p>';
-    if(next)lines+='<p>'+ico.tag+'<span>Add Products worth <b>'+rupee(Math.ceil(next.at-sub))+'</b> more to get <b>'+next.free+' Freebies</b></span></p>';
-    else lines+='<p>'+ico.tag+'<span>Wohoo! You have unlocked the <b>maximum freebies</b></span></p>';
-    return '<div class="free"><div class="free__track"><div class="free__line"><div class="free__fill" style="width:'+pct+'%"></div></div>'+dots+'</div>'+lines+'</div>';
+    lines+=next?'<p>'+ico.tag+'<span>Add Products worth <b>'+rupee(Math.ceil(next.at-sub))+'</b> more to get <b>'+next.free+' Freebies</b></span></p>':'<p>'+ico.tag+'<span>Wohoo! You have unlocked the <b>maximum freebies</b></span></p>';
+    return '<div class="free"><div class="free__track"><div class="free__line"><div class="free__fill" style="width:'+p+'%"></div></div>'+dots+'</div>'+lines+'</div>';
   }
   function itemHTML(it,idx){
-    var p=BY_ID[it.id],v=p.variants[it.v];
-    return '<div class="c-item" data-idx="'+idx+'"><a class="c-item__img" href="product.html?id='+p.id+'"><img src="'+p.image+'" alt="'+esc(p.title)+'"></a>'+
-      '<div><h3><a href="product.html?id='+p.id+'">'+esc(p.title)+'</a></h3><p class="c-size">Size: '+esc(v.label)+'</p><p class="c-price">'+money(v.price*it.qty)+'</p>'+
+    var url=it.url||('product.html?id='+encodeURIComponent(it.id));
+    return '<div class="c-item" data-idx="'+idx+'"><a class="c-item__img" href="'+url+'"><img src="'+esc(it.image)+'" alt="'+esc(it.title)+'"></a>'+
+      '<div><h3><a href="'+url+'">'+esc(it.title)+'</a></h3><p class="c-size">Size: '+esc(it.label)+'</p><p class="c-price">'+money(it.price*it.qty)+'</p>'+
       '<div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity">-</button><input type="number" min="1" max="99" value="'+it.qty+'" aria-label="Quantity"><button type="button" data-q="1" aria-label="Increase quantity">+</button></div></div>'+
-      '<button type="button" class="c-del" aria-label="Remove '+esc(p.title)+'">'+ico.trash+'</button></div>';
+      '<button type="button" class="c-del" aria-label="Remove '+esc(it.title)+'">'+ico.trash+'</button></div>';
   }
+  /* Frequently Bought Together: HTML ke #fbt-items se */
+  function fbtList(){var inCart={};items.forEach(function(i){inCart[i.id]=1;});return $$('#fbt-items [data-id]').filter(function(el){return !inCart[el.dataset.id];}).slice(0,4);}
   function fbtHTML(){
-    var inCart={};items.forEach(function(i){inCart[i.id]=1;});
-    var list=FBT_IDS.filter(function(id){return !inCart[id];}).slice(0,4);if(!list.length)return '';
-    return '<div class="fbt"><div class="fbt__head"><span class="bag"><svg viewBox="0 0 14 10" aria-hidden="true"><path d="M2 2c1 3 3 4 5 4s4-1 5-4"/></svg></span><h3>Frequently Bought Together</h3><a href="category.html">Add more value ›</a></div><div class="fbt__list">'+
-      list.map(function(id){var p=BY_ID[id],v=p.variants[0];return '<div class="fbt-card"><a class="fbt-card__row" href="product.html?id='+id+'"><img src="'+p.image+'" alt="" loading="lazy"><span><h4>'+esc(p.title)+'</h4><strong>'+money(v.price)+'</strong></span></a><button type="button" data-fbt="'+id+'">'+ico.cart+'Add to cart</button></div>';}).join('')+'</div></div>';
+    var list=fbtList();if(!list.length)return '';
+    return '<div class="fbt"><div class="fbt__head"><span class="bag"><svg viewBox="0 0 14 10" aria-hidden="true"><path d="M2 2c1 3 3 4 5 4s4-1 5-4"/></svg></span><h3>Frequently Bought Together</h3><a href="category.html">Add more value <i>›</i></a></div><div class="fbt__list">'+
+      list.map(function(el){var d=el.dataset,url='product.html?id='+encodeURIComponent(d.id);return '<div class="fbt-card"><a class="fbt-card__row" href="'+url+'"><img src="'+esc(d.img)+'" alt="" loading="lazy"><span><h4>'+esc(d.title)+'</h4><strong>'+money(d.price)+'</strong></span></a><button type="button" data-fbt="'+esc(d.id)+'">'+ico.cart+'Add to cart</button></div>';}).join('')+'</div></div>';
   }
   function cartHTML(){
     var n=count(),sub=subtotal();
     var head='<div class="cart__head">'+ico.cartBig+'<h2>Shopping cart ('+n+')</h2><button type="button" class="x-btn cart__close" data-cart-close aria-label="Close cart">'+ico.x+'</button></div>';
-    if(!items.length)return head+'<div class="cart__scroll"><div class="cart-empty"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><h3>Your cart is empty</h3><p>Add products worth '+rupee(TIERS[0].at)+' to unlock free gifts.</p><a class="btn-red" href="category.html">Continue Shopping</a></div>'+fbtHTML()+'</div>';
+    if(!items.length)return head+'<div class="cart__scroll">'+freebieHTML(0)+'<div class="cart-empty"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><h3>Your cart is empty</h3><p>Add products worth '+rupee(TIERS[0].at)+' to unlock free gifts.</p><a class="btn-red" href="category.html" data-cart-close>Continue Shopping</a></div>'+fbtHTML()+'</div>';
     return head+'<div class="cart__scroll">'+freebieHTML(sub)+items.map(itemHTML).join('')+fbtHTML()+'</div>'+
       '<div class="cart__foot"><div class="cart__sub"><span>SubTotal</span><strong>'+money(sub)+'</strong></div>'+
       '<div class="cart__pin">'+ico.pin+'Check delivery to your pincode. <button type="button" class="link" data-pin-toggle>Enter pincode ›</button>'+
@@ -1241,13 +1341,13 @@ body.cart-open{overflow:hidden}
   var cartRoots=[];
   function renderAll(){
     var n=count();var badge=$('#cart-count');if(badge)badge.textContent=n;
-    cartRoots.forEach(function(r){var y=(r.querySelector('.cart__scroll')||{}).scrollTop||0;r.innerHTML=cartHTML();var s=r.querySelector('.cart__scroll');if(s)s.scrollTop=y;});
+    cartRoots.forEach(function(r){var y=(r.querySelector('.cart__scroll')||{}).scrollTop||0;r.innerHTML=cartHTML();var sc=r.querySelector('.cart__scroll');if(sc)sc.scrollTop=y;});
     var sb=$('.sticky-buy');if(sb)sb.dataset.count=n;
   }
 
-  /* drawer (category + product pages) */
+  /* side drawer — header ke Cart par click se khulta hai */
   var drawer=null;
-  function openCart(){if(!drawer)return;drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.classList.add('cart-open');var c=drawer.querySelector('[data-cart-close]');if(c)c.focus({preventScroll:true});}
+  function openCart(){if(!drawer)return;drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.classList.add('cart-open');}
   function closeCart(){if(!drawer)return;drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');document.body.classList.remove('cart-open');}
   if(PAGE!=='cart'){
     drawer=document.createElement('aside');drawer.className='cart-drawer';drawer.setAttribute('aria-hidden','true');drawer.setAttribute('aria-label','Shopping cart');
@@ -1258,30 +1358,26 @@ body.cart-open{overflow:hidden}
   if(headerCart){headerCart.setAttribute('href','cart.html');headerCart.addEventListener('click',function(e){if(PAGE==='cart')return;e.preventDefault();openCart();});}
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCart();});
 
-  /* cart interactions (event delegation) */
   document.addEventListener('click',function(e){
     var t=e.target;
-    if(t.closest('[data-cart-close]')){closeCart();return;}
+    if(t.closest('[data-cart-close]')){if(t.closest('a.btn-red'))e.preventDefault();closeCart();return;}
     var row=t.closest('.c-item');
-    if(row){var idx=+row.dataset.idx;
-      var qb=t.closest('[data-q]');if(qb){setQty(idx,items[idx].qty+(+qb.dataset.q));return;}
-      if(t.closest('.c-del')){var nm=BY_ID[items[idx].id].title;setQty(idx,0);toast(nm+' removed');return;}
-    }
-    var fb=t.closest('[data-fbt]');if(fb){addItem(fb.dataset.fbt,0,1);toast('Added to cart');return;}
+    if(row){var idx=+row.dataset.idx,qb=t.closest('[data-q]');
+      if(qb){setQty(idx,items[idx].qty+(+qb.dataset.q));return;}
+      if(t.closest('.c-del')){var nm=items[idx].title;setQty(idx,0);toast(nm+' removed');return;}}
+    var fb=t.closest('[data-fbt]');
+    if(fb){var el=$('#fbt-items [data-id="'+fb.dataset.fbt+'"]');if(el){var d=el.dataset;addItem({id:d.id,title:d.title,image:d.img,label:d.label,price:parseFloat(d.price)},1);toast('Added to cart');}return;}
     if(t.closest('[data-pin-toggle]')){var f=t.closest('.cart__pin').querySelector('[data-pin-form]');f.classList.toggle('show');if(f.classList.contains('show'))f.querySelector('input').focus();return;}
     var ac=t.closest('.product-card .add-cart, .product-card .buy-now');
-    if(ac&&!ac.disabled){var c=ac.closest('.product-card'),sel=c.querySelector('.size-select');addItem(c.dataset.id,sel?+sel.value:0,1);
+    if(ac&&!ac.disabled){var c=ac.closest('.product-card');if(!BY_ID[c.dataset.id])return;addItem(itemFromCard(c),1);
       if(ac.classList.contains('buy-now')){location.href='cart.html';return;}
       var h=ac.innerHTML;ac.textContent='Added ✓';setTimeout(function(){ac.innerHTML=h;},900);openCart();}
     if(t.closest('a[href="#checkout"]')){e.preventDefault();toast('Checkout connect karna hai (Shopify / payment gateway)');}
   });
-  document.addEventListener('change',function(e){var inp=e.target.closest('.c-item .qty input');if(!inp)return;var idx=+inp.closest('.c-item').dataset.idx;setQty(idx,Math.max(1,parseInt(inp.value,10)||1));});
-  document.addEventListener('submit',function(e){
-    var f=e.target.closest('[data-pin-form]');if(!f)return;e.preventDefault();
+  document.addEventListener('change',function(e){var inp=e.target.closest('.c-item .qty input');if(inp)setQty(+inp.closest('.c-item').dataset.idx,Math.max(1,parseInt(inp.value,10)||1));});
+  document.addEventListener('submit',function(e){var f=e.target.closest('[data-pin-form]');if(!f)return;e.preventDefault();
     var v=f.querySelector('input').value.trim(),m=f.parentNode.querySelector('.pin-msg');
-    if(/^[1-9][0-9]{5}$/.test(v)){m.className='pin-msg';m.textContent='Delivery available to '+v+' — usually in 3-5 days.';}
-    else{m.className='pin-msg err';m.textContent='Please enter a valid 6-digit pincode.';}
-  });
+    if(/^[1-9][0-9]{5}$/.test(v)){m.className='pin-msg';m.textContent='Delivery available to '+v+' — usually in 3-5 days.';}else{m.className='pin-msg err';m.textContent='Please enter a valid 6-digit pincode.';}});
 
   /* =====================================================================
      SLIDER for .product-grid (same behaviour as home page)
@@ -1415,7 +1511,8 @@ body.cart-open{overflow:hidden}
     $('#variants').addEventListener('click',function(e){var b=e.target.closest('.variant');if(!b)return;vi=+b.dataset.v;paint();});
     $('#qty').addEventListener('click',function(e){var b=e.target.closest('[data-q]');if(!b)return;qty=Math.max(1,Math.min(99,qty+(+b.dataset.q)));paint();});
     $('#qty-input').addEventListener('change',function(){qty=Math.max(1,Math.min(99,parseInt(this.value,10)||1));paint();});
-    $$('[data-buy]').forEach(function(b){b.addEventListener('click',function(){if(!p.stock)return;addItem(p.id,vi,qty);if(b.dataset.buy==='now'){location.href='cart.html';return;}toast('Added to cart');openCart();});});
+    $$('[data-buy]').forEach(function(b){b.addEventListener('click',function(){if(!p.stock)return;var v=p.variants[vi],fi=$('#g-main-wrap .swiper-slide img');
+      addItem({id:p.id,title:p.title,image:fi?fi.getAttribute('src'):p.image,url:'product.html?id='+encodeURIComponent(p.id),label:v.label,price:v.price},qty);if(b.dataset.buy==='now'){location.href='cart.html';return;}openCart();});});
     $('#g-share').addEventListener('click',function(){var on=this.classList.toggle('on');this.setAttribute('aria-pressed',on);toast(on?'Added to wishlist':'Removed from wishlist');});
     paint();
 
