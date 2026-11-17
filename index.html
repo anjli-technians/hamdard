@@ -589,6 +589,212 @@
     .category-card strong{white-space:nowrap;overflow:hidden;line-height:1.2;font-size:clamp(8px,7.5cqi,14px)}
     .category-card small{white-space:nowrap}
   </style>
+<style id="cart-drawer-css">
+/* ===== CART DRAWER (product page jaisa) — sirf cart ke styles ===== */
+.btn-red{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;background:var(--red);color:#fff;font-weight:500;cursor:pointer;transition:background .2s}
+.btn-red:hover{background:var(--deep-red)}
+.btn-red svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.x-btn{width:34px;height:34px;display:grid;place-items:center;border:0;background:none;cursor:pointer;border-radius:50%}
+.x-btn:hover{background:#f4f4f4}
+.x-btn svg{width:20px;height:20px;fill:none;stroke:#111;stroke-width:2.2;stroke-linecap:round}
+.qty{display:inline-flex;align-items:center;height:36px;border:1px solid #999;border-radius:4px;background:#fff}
+.qty button{width:34px;height:100%;border:0;background:none;font-size:16px;cursor:pointer}
+.qty input{width:32px;border:0;text-align:center;font-size:13px;background:none;-moz-appearance:textfield}
+.qty input::-webkit-outer-spin-button,.qty input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+/* =====================================================================
+   CART (drawer on every page + full view on cart.html)
+   ===================================================================== */
+.cart-drawer{position:fixed;inset:0;z-index:1300;visibility:hidden;pointer-events:none}
+.cart-drawer.open{visibility:visible;pointer-events:auto}
+.cart-drawer__shade{position:absolute;inset:0;background:#0007;opacity:0;transition:opacity .3s}
+.cart-drawer.open .cart-drawer__shade{opacity:1}
+.cart-drawer__box{position:absolute;right:0;top:0;bottom:0;width:min(470px,100vw);background:#fff;transform:translateX(100%);transition:transform .34s ease;display:flex;flex-direction:column}
+.cart-drawer.open .cart-drawer__box{transform:none}
+body.cart-open{overflow:hidden}
+
+.cart{display:flex;flex-direction:column;height:100%;font-family:'Poppins',sans-serif}
+.cart__head{display:flex;align-items:center;gap:12px;padding:18px 20px 14px;flex:0 0 auto}
+.cart__head svg.c-ico{width:26px;height:26px;fill:none;stroke:var(--red);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.cart__head h2{margin:0;font-family:'Poppins',sans-serif;font-size:21px;font-weight:500;flex:1}
+.cart__scroll{flex:1;overflow-y:auto;padding:0 16px 16px;-webkit-overflow-scrolling:touch}
+.cart__foot{flex:0 0 auto;border-top:1px solid #dcdcdc;background:#fff}
+
+.free{background:var(--pink);border-radius:14px;padding:10px 14px 10px;margin-bottom:18px}
+.free__track{position:relative;height:28px;margin:0 14px 22px 0}
+.free__line{position:absolute;left:0;right:0;top:50%;height:7px;margin-top:-3.5px;border-radius:6px;background:#e3e3e7;overflow:hidden}
+.free__fill{height:100%;background:var(--red);border-radius:6px;transition:width .5s ease}
+.free__dot{position:absolute;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;background:#fff;box-shadow:0 2px 6px #0000001f;display:grid;place-items:center;transition:background .3s}
+.free__dot svg{width:14px;height:14px;fill:none;stroke:var(--red);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.free__dot.on{background:var(--red)}
+.free__dot.on svg{stroke:#fff}
+.free__dot small{position:absolute;top:31px;left:50%;transform:translateX(-50%);font-size:9px;color:#777;white-space:nowrap}
+.free p{display:flex;align-items:flex-start;gap:8px;margin:10px 0 0;font-size:13px;line-height:1.4}
+.free p svg{width:14px;height:14px;fill:var(--red);flex:0 0 auto;margin-top:2px}
+.free b{color:var(--red);font-weight:500}
+
+.c-item{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:12px;border:1px solid #111;border-radius:14px;padding:10px;margin-bottom:12px;background:#fff}
+.c-item__img{border-radius:8px;background:#fcf2f3;display:flex;align-items:center;justify-content:center;aspect-ratio:1/1.08;overflow:hidden}
+.c-item__img img{width:86%;height:86%;object-fit:contain}
+.c-item h3{margin:4px 0 2px;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600;line-height:1.3}
+.c-item .c-size{font-size:11.5px;color:#666;margin:0 0 8px}
+.c-item .c-price{color:var(--red);font-weight:600;font-size:16px;margin:0 0 10px}
+.c-item .c-price del{color:#999;font-size:11px;font-weight:400;margin-left:6px}
+.c-item .qty{height:30px;border-radius:5px}
+.c-item .qty button{width:28px;font-size:14px}
+.c-item .qty input{width:26px;font-size:12px}
+.c-del{width:32px;height:32px;border:0;background:none;cursor:pointer;border-radius:50%;display:grid;place-items:center;align-self:start}
+.c-del:hover{background:#fff1f1}
+.c-del svg{width:19px;height:19px;fill:none;stroke:#111;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.c-del img{display:block;width:19px;height:auto}
+
+.fbt{background:var(--pink);border-radius:14px;padding:14px 12px 12px;margin-top:14px}
+.fbt__head{display:flex;align-items:center;gap:10px;margin:0 4px 12px}
+.fbt__head .bag{width:26px;height:24px;border-radius:4px;background:var(--red);display:grid;place-items:center;flex:0 0 auto}
+.fbt__head .bag svg{width:14px;height:10px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round}
+.fbt__head h3{margin:0;flex:1;font-family:'Poppins',sans-serif;font-size:14px;font-weight:600}
+.fbt__head a{font-size:11px;white-space:nowrap}
+.fbt__head a:hover{color:var(--red)}
+.fbt__list{display:grid;grid-auto-flow:column;grid-auto-columns:calc(50% - 5px);gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.fbt__list::-webkit-scrollbar{display:none}
+.fbt-card{scroll-snap-align:start;background:#fff;border-radius:12px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.fbt-card__row{display:grid;grid-template-columns:52px minmax(0,1fr);gap:8px;align-items:center}
+.fbt-card__row img{width:52px;height:62px;object-fit:contain}
+.fbt-card h4{margin:0 0 4px;font-family:'Poppins',sans-serif;font-size:11.5px;font-weight:400;line-height:1.3;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.fbt-card strong{color:var(--red);font-size:12.5px;font-weight:600}
+.fbt-card button{height:32px;border:1px solid var(--red);border-radius:6px;background:#fff;font-size:12.5px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;transition:background .2s,color .2s}
+.fbt-card button svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.fbt-card button:hover{background:var(--red);color:#fff}
+
+.cart__sub{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 10px}
+.cart__sub span{font-size:20px;font-weight:600}
+.cart__sub strong{font-size:22px;font-weight:600;color:var(--red)}
+.cart__pin{background:#faf8f6;padding:10px 20px;font-size:12.5px;text-align:center}
+.cart__pin svg{width:13px;height:13px;fill:var(--red);vertical-align:-2px;margin-right:4px}
+.cart__pin button.link{border:0;background:none;padding:0;color:var(--red);font-weight:500;text-decoration:underline;cursor:pointer;font-size:12.5px}
+.pin-form{display:none;gap:8px;justify-content:center;margin-top:8px}
+.pin-form.show{display:flex}
+.pin-form input{width:140px;height:34px;border:1px solid #bbb;border-radius:6px;padding:0 10px;font-size:13px}
+.pin-form button{height:34px;padding:0 14px;border-radius:6px;font-size:12px}
+.pin-msg{font-size:12px;margin-top:6px;color:#0f8a2f}
+.pin-msg.err{color:var(--red)}
+.cart__checkout{display:flex;width:calc(100% - 32px);margin:10px 16px calc(14px + env(safe-area-inset-bottom,0px));height:54px;border-radius:30px;font-size:19px;font-weight:600}
+.cart-empty{text-align:center;padding:50px 20px}
+.cart-empty svg{width:64px;height:64px;fill:none;stroke:#e0b5b8;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.cart-empty h3{margin:12px 0 6px;font-family:'Poppins',sans-serif;font-weight:500}
+.cart-empty p{margin:0 0 18px;color:#777;font-size:13px}
+.cart-empty a{display:inline-flex;height:42px;padding:0 26px;border-radius:24px}
+/* toast */
+.hm-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);background:#171717;color:#fff;padding:11px 18px;border-radius:8px;font-size:13px;z-index:1500;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none}
+.hm-toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:700px){
+  /* cart */
+  .cart-drawer__box{width:100vw}
+  .cart__head{padding:16px 16px 12px}
+  .cart__head h2{font-size:19px}
+  .cart__scroll{padding:0 14px 14px}
+  .c-item{grid-template-columns:88px minmax(0,1fr) auto;gap:10px}
+  .c-item h3{font-size:13px}
+  .c-item .c-price{font-size:15px}
+  .free p{font-size:12px}
+  .fbt__list{grid-auto-columns:78%}
+}
+/* =====================================================================
+   CART DRAWER — design (Shopping_card_Page) match
+   ===================================================================== */
+.cart-drawer__box{width:min(440px,100vw)}
+.cart{font-family:'Poppins',sans-serif;color:#000}
+.cart__head{gap:14px;padding: 0 22px;margin-bottom: 10px;margin-top: 10px;}
+.cart__head svg.c-ico{width:20px;height:20px;stroke-width:2.2}
+.cart__head h2{font-size:13px;font-weight:500;letter-spacing:-.2px}
+.cart__head .x-btn svg{width:22px;height:22px;stroke:#000;stroke-width:2.4}
+.cart__scroll{padding:0 14px 18px}
+/* freebies */
+.free{background:#fdf0f0;border-radius:14px;padding:10px 14px 10px;margin-bottom:22px}
+.free__track{height:26px;margin:0 6px 18px 0}
+.free__line{height:7px;margin-top:-3.5px;background:#e4e4e8}
+.free__dot{width:24px;height:24px;margin:-12px 0 0 -12px;background:#fff;box-shadow:0 1px 6px #00000024}
+.free__dot svg{width:12px;height:12px;stroke-width:2.2}
+.free__dot.on{width:26px;height:26px;margin:-13px 0 0 -13px;background:var(--red);box-shadow:0 1px 6px #ed1c2b55}
+.free__dot small{display:none}
+.free p{gap:9px;margin:9px 0 0;font-size:13px;line-height:1.35;color:#111}
+.free p svg{width:13px;height:13px;margin-top:3px}
+.free b{font-weight:500}
+/* cart item */
+.c-item{grid-template-columns:108px minmax(0,1fr) auto;gap:14px;border:1px solid #000;border-radius:14px;padding:5px 8px 5px 8px;margin-bottom:12px}
+.c-item__img{border-radius:8px;background:#fcf1f2;aspect-ratio:auto;height:104px}
+.c-item__img img{width:80%;height:88%}
+.c-item h3{margin:10px 0 2px;font-size:13.5px;font-weight:600;line-height:1.3;color:#000}
+.c-item .c-size{font-size:10.5px;color:#6b6b6b;margin:0px}
+.c-item .c-price{font-size:16px;font-weight:600;margin:0 0 5px;color:var(--red)}
+.c-item .qty{height:22px;border:1px solid #000;border-radius:4px;background:#fdf6f6;width:62px;justify-content:space-between}
+.c-item .qty button{width:20px;font-size:12px;line-height:1;color:#000}
+.c-item .qty input{width:18px;font-size:10px;color:#000}
+.c-del{width:30px;height:30px;margin-top:4px}
+.c-del svg,.c-del img{width:17px;height:auto}
+/* frequently bought together */
+.fbt{background:#fdf0f0;border-radius:14px;padding:14px 10px 12px;margin-top:4px}
+.fbt__head{gap:10px;margin:2px 6px 12px}
+.fbt__head .bag{width:20px;height:18px;border-radius:3px}
+.fbt__head .bag svg{width:11px;height:8px}
+.fbt__head h3{font-size:12.5px;font-weight:600;color:#000}
+.fbt__head a{display:inline-flex;align-items:center;gap:4px;font-size:9.5px;color:#000}
+.fbt__head a i{color:var(--red);font-style:normal;font-weight:700;font-size:11px}
+.fbt__list{grid-auto-columns:calc(50% - 4px);gap:8px}
+.fbt-card{border-radius:10px;padding:10px 8px 8px;gap:8px}
+.fbt-card__row{grid-template-columns:58px minmax(0,1fr);gap:8px;align-items:center}
+.fbt-card__row img{width:58px;height:62px}
+.fbt-card h4{font-size:10px;font-weight:400;line-height:1.35;color:#000;margin:0 0 4px}
+.fbt-card strong{font-size:10.5px;font-weight:600}
+.fbt-card button{height:26px;border:1px solid var(--red);border-radius:5px;background:#fff;color:#000;font-size:11px;gap:6px}
+.fbt-card button svg{width:13px;height:13px;stroke:#000}
+.fbt-card button:hover svg{stroke:#fff}
+/* footer */
+.cart__foot{border-top:0;padding-top:0}
+.cart__foot:before{content:"";display:block;height:1px;background:#d4d4d4;margin:0 14px}
+.cart__sub{padding:5px 22px 5px}
+.cart__sub span{font-size:16px;font-weight:600;color:#000}
+.cart__sub strong{font-size:18px;font-weight:600}
+.cart__pin{background:#faf8f6;padding:5px 16px;font-size:10.5px;color:#000}
+.cart__pin svg{width:11px;height:11px}
+.cart__pin button.link{font-size:10.5px;font-weight:500}
+.cart__checkout{width:calc(100% - 44px);margin:6px 22px calc(18px + env(safe-area-inset-bottom,0px));height:45px;border-radius:40px;font-size:17px;font-weight:500}
+/* empty cart */
+.cart-empty{padding:14px 10px 24px}
+.cart-empty svg{width:54px;height:54px}
+.cart-empty h3{font-size:16px;margin:8px 0 4px}
+.cart-empty p{font-size:12px;margin:0 0 14px}
+.cart-empty a{height:40px;padding:0 24px;font-size:13px}
+@media(max-width:700px){
+  .cart-drawer__box{width:100vw}
+  .cart__head{padding:16px 16px 14px}
+  .cart__head h2{font-size:19px}
+  .cart__scroll{padding:0 12px 14px}
+  .c-item{grid-template-columns:100px minmax(0,1fr) auto;gap:12px}
+  .c-item__img{height:96px}
+  .c-item h3{font-size:13px;margin-top:6px}
+  .c-item .c-price{font-size:15px}
+  .fbt__list{grid-auto-columns:calc(50% - 4px)}
+  .cart__sub{padding:14px 18px 10px}
+  .cart__sub span{font-size:19px}
+  .cart__sub strong{font-size:20px}
+  .cart__checkout{width:calc(100% - 32px);margin:6px 16px calc(14px + env(safe-area-inset-bottom,0px));height:52px;font-size:18px}
+}
+
+/* cart item: price left, quantity right — ek hi line mein (sirf placement) */
+.c-item .c-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.c-item .c-row .c-price{margin:0}
+.c-item .c-row .qty{flex:0 0 auto}
+
+/* freebies: text bar ke upar — spacing wahi, bas order ulta */
+.free p{margin:0 0 9px}
+.free p:last-of-type{margin-bottom:14px}
+.free__track{margin-bottom:0}
+
+/* do FBT sections ke beech gap */
+.fbt + .fbt{margin-top:12px}
+
+body.cart-open .hm-toast{bottom:120px}
+</style>
 </head>
 <body>
   <div class="announcement"><div class="announcement__inner">
@@ -697,6 +903,27 @@
       <section class="section-block"><div class="section-heading"><h2>Khaalis Whole Spices</h2><a class="view-all" href="#spices">View All ›</a></div><div class="product-grid" data-products="whole"></div></section>
       <section class="quality"><h2>We Believe in higher standards of quality</h2><p>Quality Control and Quality Assurance department at Hamdard ensure the right quality of raw material and strictly control the processes with modern technologies in order to manufacture the efficacious products.</p><div class="quality-marks"><img class="cert-icon" src="assets/cert-gmp.svg" alt="GMP - Good Manufacturing Practice" loading="lazy"><img class="cert-icon" src="assets/cert-food-safety.svg" alt="Food Safety System ISO 22000" loading="lazy"><img class="cert-icon" src="assets/cert-fda.svg" alt="FDA" loading="lazy"><img class="cert-icon" src="assets/cert-quality-system.svg" alt="Quality System Certification ISO 9001" loading="lazy"></div></section>
     </div>
+      <!-- ===================== CART: FREQUENTLY BOUGHT TOGETHER =====================
+           Cart drawer mein dikhne wale suggestion products. Har line = ek product.
+           ============================================================================= -->
+      <!-- data-title = section ki heading | data-link = "Add more value" ka link | data-link-text = us link ka text -->
+      <div id="fbt-items" class="fbt-src" data-title="Frequently Bought Together" data-link="category.html" data-link-text="Add more value" hidden>
+        <div data-id="honeydew-honey" data-title="Hamdard Honey- Honeydew &amp; Blossom Honey" data-img="assets/honey.png" data-label="50 g" data-price="33.25" data-old="40"></div>
+        <div data-id="non-roasted-vermicelli" data-title="Hamdard Khaalis Non-Roasted Shortcut Vermicelli" data-img="assets/Vermicelli.png" data-label="Pack of 12" data-price="1235" data-old="1440"></div>
+        <div data-id="cumin-jeera" data-title="Hamdard Khaalis Cumin (Jeera)" data-img="assets/product-cumin-whole.png" data-label="50 G" data-price="30.6" data-old="36"></div>
+        <div data-id="rooh-afza" data-title="Rooh Afza No Added Sugar" data-img="assets/product-rooh-afza-no-sugar.png" data-label="750 ml" data-price="120" data-old="150"></div>
+      </div>
+
+      <!-- ===================== CART: CLONE SECTION (same design, alag products) =====================
+           Heading data-title mein badlein. Products ki lines upar wale jaisi hi hain — add/remove kar sakte hain.
+           Aur section chahiye to ye poora block copy karke id badal dein (jaise fbt-items-3).
+           ============================================================================================ -->
+      <div id="fbt-items-2" class="fbt-src" data-title="Your wishlist items" data-link="category.html" data-link-text="View all" hidden>
+        <div data-id="haleem-masala" data-title="Hamdard Khaalis Haleem Masala" data-img="assets/product-haleem-masala.png" data-label="50 g" data-price="65" data-old="80"></div>
+        <div data-id="kachi-ghani-mustard-oil" data-title="Hamdard Kachi Ghani Mustard Oil" data-img="assets/product-mustard-oil-1l.png" data-label="1L (910g) Bottle" data-price="195" data-old="260"></div>
+        <div data-id="cumin-jeera" data-title="Hamdard Khaalis Cumin (Jeera)" data-img="assets/product-cumin-whole.png" data-label="50 G" data-price="30.6" data-old="36"></div>
+        <div data-id="rooh-afza" data-title="Rooh Afza No Added Sugar" data-img="assets/product-rooh-afza-no-sugar.png" data-label="750 ml" data-price="120" data-old="150"></div>
+      </div>
   </main>
   <script>
     (function(){
@@ -785,7 +1012,7 @@
       }
       document.querySelector('#products').innerHTML=Array.from({length:8},function(){return card(productGroups.best);}).join('');
       document.querySelectorAll('[data-products]').forEach(function(grid){var key=grid.getAttribute('data-products');grid.innerHTML=Array.from({length:8},function(){return card(productGroups[key]);}).join('');});
-      var cartCount=0;document.addEventListener('click',function(event){if(event.target.classList.contains('add-cart')){cartCount++;document.querySelector('#cart-count').textContent=cartCount;var b=event.target,h=b.innerHTML;b.textContent='Added ✓';setTimeout(function(){b.innerHTML=h;},900);}if(event.target.classList.contains('buy-now')){var b2=event.target,h2=b2.innerHTML;b2.textContent='Demo only';setTimeout(function(){b2.innerHTML=h2;},900);}});
+      /* Add to Cart ab neeche wale CART DRAWER script se chalta hai */document.addEventListener('click',function(event){if(event.target.classList.contains('buy-now')){var b2=event.target,h2=b2.innerHTML;b2.textContent='Demo only';setTimeout(function(){b2.innerHTML=h2;},900);}});
       document.querySelector('.search').addEventListener('submit',function(event){event.preventDefault();var query=this.querySelector('input').value.trim().toLowerCase();if(!query)return;var matches=Array.from(document.querySelectorAll('.product-card')).filter(function(c){return c.textContent.toLowerCase().includes(query);});document.querySelectorAll('.product-card').forEach(function(c){c.style.display=matches.includes(c)?'':'none';});document.querySelector('#products').scrollIntoView({behavior:'smooth',block:'start'});});
 
       /* ===== product + category sliders: auto + draggable ===== */
@@ -883,5 +1110,132 @@
       })();
     })();
   </script>
+<script>
+/* =====================================================================
+   CART DRAWER — product page wala hi cart (same design + same localStorage,
+   isliye dono pages ka cart ek hi rehta hai)
+   ===================================================================== */
+(function(){
+  'use strict';
+  var DELETE_ICON='delete.png';   /* cart ka delete icon — path yahan badlein */
+  var TIERS=[{at:149,free:2},{at:469,free:5},{at:799,free:8}];  /* freebie milestones */
+
+  function money(n){return 'Rs. '+Number(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function rupee(n){return '₹'+Number(n).toLocaleString('en-IN',{maximumFractionDigits:2});}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function $(s,r){return (r||document).querySelector(s);}
+  function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s));}
+  function slug(s){return String(s).toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+
+  /* cart ke andar delete icon na mile -> SVG dustbin */
+  document.addEventListener('error',function(e){var t=e.target;if(!t||t.tagName!=='IMG'||!t.hasAttribute('data-icon'))return;
+    var sp=document.createElement('span');sp.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4h6v3"/></svg>';t.replaceWith(sp.firstChild);},true);
+
+  var toastEl;
+  function toast(msg){if(!toastEl){toastEl=document.createElement('div');toastEl.className='hm-toast';toastEl.setAttribute('role','status');document.body.appendChild(toastEl);}toastEl.textContent=msg;toastEl.classList.add('show');clearTimeout(toastEl._t);toastEl._t=setTimeout(function(){toastEl.classList.remove('show');},1800);}
+
+  var ico={
+    cart:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/></svg>',
+    trash:'<img src="'+DELETE_ICON+'" alt="" width="17" height="18" data-icon>',
+    tag:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4zM7.5 9a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/></svg>',
+    giftDot:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M5 12v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-8M7.5 8a2.5 2.5 0 1 1 0-5C10 3 12 8 12 8s2-5 4.5-5a2.5 2.5 0 1 1 0 5"/></svg>',
+    x:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg>',
+    cartBig:'<svg class="c-ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg>',
+    pin:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>'
+  };
+
+  /* ---------- cart data (product page ke saath shared) ---------- */
+  var KEY='hm_cart_v2',mem=[];
+  function load(){try{var r=JSON.parse(localStorage.getItem(KEY)||'null');if(Array.isArray(r))return r;}catch(_){}return mem;}
+  function save(){mem=items;try{localStorage.setItem(KEY,JSON.stringify(items));}catch(_){}}
+  var items=load().filter(function(i){return i&&i.id&&i.title&&!isNaN(i.price);});
+  function count(){return items.reduce(function(s,i){return s+i.qty;},0);}
+  function subtotal(){return items.reduce(function(s,i){return s+i.price*i.qty;},0);}
+  function addItem(it,qty){var f=items.filter(function(i){return i.id===it.id&&i.label===it.label;})[0];if(f)f.qty=Math.min(99,f.qty+(qty||1));else{it.qty=qty||1;items.unshift(it);}save();renderAll();}
+  function setQty(idx,q){if(q<1)items.splice(idx,1);else items[idx].qty=Math.min(99,q);save();renderAll();}
+  /* home page ke product card se item banana */
+  function itemFromCard(c){
+    var title=(c.querySelector('.product-title')||{}).textContent||'Product';
+    var sel=c.querySelector('.size-select'),label=sel&&sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].text:'';
+    var priceTxt=(c.querySelector('.price strong')||{}).textContent||'0';
+    var img=c.querySelector('.img-main');
+    return {id:slug(title),title:title.trim(),image:img?img.getAttribute('src'):'',label:label,price:parseFloat(priceTxt.replace(/Rs\.?|₹/gi,'').replace(/[^0-9.]/g,''))||0};
+  }
+
+  function freebieHTML(sub){
+    var unlocked=0,next=null;TIERS.forEach(function(t){if(sub>=t.at)unlocked=t.free;else if(!next)next=t;});
+    var stops=[0,40,68,96],amts=[0].concat(TIERS.map(function(t){return t.at;})),p=96;
+    for(var k=0;k<amts.length-1;k++){if(sub<amts[k+1]){p=stops[k]+(sub-amts[k])/(amts[k+1]-amts[k])*(stops[k+1]-stops[k]);break;}}
+    var dots=TIERS.map(function(t,k){return '<span class="free__dot'+(sub>=t.at?' on':'')+'" style="left:'+stops[k+1]+'%">'+ico.giftDot+'</span>';}).join('');
+    var lines='';
+    if(unlocked)lines+='<p>'+ico.tag+'<span>You just Unlocked <b>'+unlocked+' Freebies</b></span></p>';
+    lines+=next?'<p>'+ico.tag+'<span>Add Products worth <b>'+rupee(Math.ceil(next.at-sub))+'</b> more to get <b>'+next.free+' Freebies</b></span></p>':'<p>'+ico.tag+'<span>Wohoo! You have unlocked the <b>maximum freebies</b></span></p>';
+    return '<div class="free">'+lines+'<div class="free__track"><div class="free__line"><div class="free__fill" style="width:'+p+'%"></div></div>'+dots+'</div></div>';
+  }
+  function itemHTML(it,idx){
+    var url=it.url||('product.html?id='+encodeURIComponent(it.id));
+    return '<div class="c-item" data-idx="'+idx+'"><a class="c-item__img" href="'+url+'"><img src="'+esc(it.image)+'" alt="'+esc(it.title)+'"></a>'+
+      '<div><h3><a href="'+url+'">'+esc(it.title)+'</a></h3><p class="c-size">Size: '+esc(it.label)+'</p><div class="c-row"><p class="c-price">'+money(it.price*it.qty)+'</p>'+
+      '<div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity">-</button><input type="number" min="1" max="99" value="'+it.qty+'" aria-label="Quantity"><button type="button" data-q="1" aria-label="Increase quantity">+</button></div></div></div>'+
+      '<button type="button" class="c-del" aria-label="Remove '+esc(it.title)+'">'+ico.trash+'</button></div>';
+  }
+  /* Frequently Bought Together + clone sections: HTML ke har .fbt-src block se ek section */
+  function fbtList(src){var inCart={};items.forEach(function(i){inCart[i.id]=1;});return $$('[data-id]',src).filter(function(el){return !inCart[el.dataset.id];}).slice(0,4);}
+  function fbtBlock(src){
+    var list=fbtList(src);if(!list.length)return '';
+    var s=src.dataset,title=s.title||'Frequently Bought Together',link=s.link||'category.html',linkText=s.linkText||'Add more value';
+    return '<div class="fbt"><div class="fbt__head"><span class="bag"><svg viewBox="0 0 14 10" aria-hidden="true"><path d="M2 2c1 3 3 4 5 4s4-1 5-4"/></svg></span><h3>'+esc(title)+'</h3><a href="'+esc(link)+'">'+esc(linkText)+' <i>›</i></a></div><div class="fbt__list">'+
+      list.map(function(el){var d=el.dataset,url='product.html?id='+encodeURIComponent(d.id);return '<div class="fbt-card"><a class="fbt-card__row" href="'+url+'"><img src="'+esc(d.img)+'" alt="" loading="lazy"><span><h4>'+esc(d.title)+'</h4><strong>'+money(d.price)+'</strong></span></a><button type="button" data-fbt="'+esc(d.id)+'" data-fbt-src="'+esc(src.id)+'">'+ico.cart+'Add to cart</button></div>';}).join('')+'</div></div>';
+  }
+  function fbtHTML(){return $$('.fbt-src').map(fbtBlock).join('');}
+  function cartHTML(){
+    var n=count(),sub=subtotal();
+    var head='<div class="cart__head">'+ico.cartBig+'<h2>Cart Item ('+n+')</h2><button type="button" class="x-btn cart__close" data-cart-close aria-label="Close cart">'+ico.x+'</button></div>';
+    if(!items.length)return head+'<div class="cart__scroll">'+freebieHTML(0)+'<div class="cart-empty"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><h3>Your cart is empty</h3><p>Add products worth '+rupee(TIERS[0].at)+' to unlock free gifts.</p><a class="btn-red" href="category.html" data-cart-close>Continue Shopping</a></div>'+fbtHTML()+'</div>';
+    return head+'<div class="cart__scroll">'+freebieHTML(sub)+items.map(itemHTML).join('')+fbtHTML()+'</div>'+
+      '<div class="cart__foot"><div class="cart__sub"><span>SubTotal</span><strong>'+money(sub)+'</strong></div>'+
+      '<div class="cart__pin">'+ico.pin+'Check delivery to your pincode. <button type="button" class="link" data-pin-toggle>Enter pincode ›</button>'+
+      '<form class="pin-form" data-pin-form><input inputmode="numeric" maxlength="6" placeholder="6-digit pincode" aria-label="Pincode"><button class="btn-red" type="submit">Check</button></form><div class="pin-msg" aria-live="polite"></div></div>'+
+      '<a class="btn-red cart__checkout" href="#checkout">Check Out</a></div>';
+  }
+
+  /* ---------- drawer ---------- */
+  var drawer=document.createElement('aside');drawer.className='cart-drawer';drawer.setAttribute('aria-hidden','true');drawer.setAttribute('aria-label','Shopping cart');
+  drawer.innerHTML='<div class="cart-drawer__shade" data-cart-close></div><div class="cart-drawer__box" role="dialog" aria-modal="true"><div class="cart"></div></div>';
+  document.body.appendChild(drawer);var root=drawer.querySelector('.cart');
+  function renderAll(){
+    var badge=$('#cart-count');if(badge)badge.textContent=count();
+    var y=(root.querySelector('.cart__scroll')||{}).scrollTop||0;root.innerHTML=cartHTML();var sc=root.querySelector('.cart__scroll');if(sc)sc.scrollTop=y;
+  }
+  function openCart(){drawer.classList.add('open');drawer.setAttribute('aria-hidden','false');document.body.classList.add('cart-open');}
+  function closeCart(){drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true');document.body.classList.remove('cart-open');}
+  var headerCart=$('.header-cart');
+  if(headerCart)headerCart.addEventListener('click',function(e){e.preventDefault();openCart();});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCart();});
+
+  document.addEventListener('click',function(e){
+    var t=e.target;
+    if(t.closest('[data-cart-close]')){if(t.closest('a.btn-red'))e.preventDefault();closeCart();return;}
+    var row=t.closest('.c-item');
+    if(row){var idx=+row.dataset.idx,qb=t.closest('[data-q]');
+      if(qb){setQty(idx,items[idx].qty+(+qb.dataset.q));return;}
+      if(t.closest('.c-del')){var nm=items[idx].title;setQty(idx,0);toast(nm+' removed');return;}}
+    var fb=t.closest('[data-fbt]');
+    if(fb){var el=$('#'+(fb.dataset.fbtSrc||'fbt-items')+' [data-id="'+fb.dataset.fbt+'"]');if(el){var d=el.dataset;addItem({id:d.id,title:d.title,image:d.img,label:d.label,price:parseFloat(d.price)},1);toast('Added to cart');}return;}
+    if(t.closest('[data-pin-toggle]')){var f=t.closest('.cart__pin').querySelector('[data-pin-form]');f.classList.toggle('show');if(f.classList.contains('show'))f.querySelector('input').focus();return;}
+    /* home page card ka "Add to Cart" -> cart mein daalo + drawer kholo */
+    var ac=t.closest('.product-card .add-cart');
+    if(ac&&!ac.disabled){var c=ac.closest('.product-card');addItem(itemFromCard(c),1);
+      var h=ac.innerHTML;ac.textContent='Added ✓';setTimeout(function(){ac.innerHTML=h;},900);openCart();return;}
+    if(t.closest('a[href="#checkout"]')){e.preventDefault();toast('Checkout connect karna hai (Shopify / payment gateway)');}
+  });
+  document.addEventListener('change',function(e){var inp=e.target.closest('.c-item .qty input');if(inp)setQty(+inp.closest('.c-item').dataset.idx,Math.max(1,parseInt(inp.value,10)||1));});
+  document.addEventListener('submit',function(e){var f=e.target.closest('[data-pin-form]');if(!f)return;e.preventDefault();
+    var v=f.querySelector('input').value.trim(),m=f.parentNode.querySelector('.pin-msg');
+    if(/^[1-9][0-9]{5}$/.test(v)){m.className='pin-msg';m.textContent='Delivery available to '+v+' — usually in 3-5 days.';}else{m.className='pin-msg err';m.textContent='Please enter a valid 6-digit pincode.';}});
+
+  renderAll();
+})();
+</script>
 </body>
 </html>

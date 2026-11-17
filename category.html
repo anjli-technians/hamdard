@@ -1001,13 +1001,13 @@ body.hm-edit .m-float{display:none}
    ===================================================================== */
 .cart-drawer__box{width:min(440px,100vw)}
 .cart{font-family:'Poppins',sans-serif;color:#000}
-.cart__head{gap:14px;padding:22px 22px 18px}
-.cart__head svg.c-ico{width:26px;height:26px;stroke-width:2.2}
-.cart__head h2{font-size:20px;font-weight:500;letter-spacing:-.2px}
+.cart__head{gap:14px;padding: 0 22px;margin-bottom: 10px;margin-top: 10px;}
+.cart__head svg.c-ico{width:20px;height:20px;stroke-width:2.2}
+.cart__head h2{font-size:13px;font-weight:500;letter-spacing:-.2px}
 .cart__head .x-btn svg{width:22px;height:22px;stroke:#000;stroke-width:2.4}
 .cart__scroll{padding:0 14px 18px}
 /* freebies */
-.free{background:#fdf0f0;border-radius:14px;padding:22px 14px 16px;margin-bottom:22px}
+.free{background:#fdf0f0;border-radius:14px;padding:10px 14px 10px;margin-bottom:22px}
 .free__track{height:26px;margin:0 6px 18px 0}
 .free__line{height:7px;margin-top:-3.5px;background:#e4e4e8}
 .free__dot{width:24px;height:24px;margin:-12px 0 0 -12px;background:#fff;box-shadow:0 1px 6px #00000024}
@@ -1018,12 +1018,12 @@ body.hm-edit .m-float{display:none}
 .free p svg{width:13px;height:13px;margin-top:3px}
 .free b{font-weight:500}
 /* cart item */
-.c-item{grid-template-columns:108px minmax(0,1fr) auto;gap:14px;border:1px solid #000;border-radius:14px;padding:10px 12px 10px 10px;margin-bottom:12px}
+.c-item{grid-template-columns:108px minmax(0,1fr) auto;gap:14px;border:1px solid #000;border-radius:14px;padding:5px 8px 5px 8px;margin-bottom:12px}
 .c-item__img{border-radius:8px;background:#fcf1f2;aspect-ratio:auto;height:104px}
 .c-item__img img{width:80%;height:88%}
 .c-item h3{margin:10px 0 2px;font-size:13.5px;font-weight:600;line-height:1.3;color:#000}
-.c-item .c-size{font-size:10.5px;color:#6b6b6b;margin:0 0 12px}
-.c-item .c-price{font-size:16px;font-weight:600;margin:0 0 12px;color:var(--red)}
+.c-item .c-size{font-size:10.5px;color:#6b6b6b;margin:0px}
+.c-item .c-price{font-size:16px;font-weight:600;margin:0 0 5px;color:var(--red)}
 .c-item .qty{height:22px;border:1px solid #000;border-radius:4px;background:#fdf6f6;width:62px;justify-content:space-between}
 .c-item .qty button{width:20px;font-size:12px;line-height:1;color:#000}
 .c-item .qty input{width:18px;font-size:10px;color:#000}
@@ -1049,13 +1049,13 @@ body.hm-edit .m-float{display:none}
 /* footer */
 .cart__foot{border-top:0;padding-top:0}
 .cart__foot:before{content:"";display:block;height:1px;background:#d4d4d4;margin:0 14px}
-.cart__sub{padding:16px 22px 12px}
-.cart__sub span{font-size:20px;font-weight:600;color:#000}
-.cart__sub strong{font-size:21px;font-weight:600}
-.cart__pin{background:#faf8f6;padding:12px 16px;font-size:10.5px;color:#000}
+.cart__sub{padding:5px 22px 5px}
+.cart__sub span{font-size:16px;font-weight:600;color:#000}
+.cart__sub strong{font-size:18px;font-weight:600}
+.cart__pin{background:#faf8f6;padding:5px 16px;font-size:10.5px;color:#000}
 .cart__pin svg{width:11px;height:11px}
 .cart__pin button.link{font-size:10.5px;font-weight:500}
-.cart__checkout{width:calc(100% - 44px);margin:6px 22px calc(18px + env(safe-area-inset-bottom,0px));height:56px;border-radius:40px;font-size:19px;font-weight:600}
+.cart__checkout{width:calc(100% - 44px);margin:6px 22px calc(18px + env(safe-area-inset-bottom,0px));height:45px;border-radius:40px;font-size:17px;font-weight:500}
 /* empty cart */
 .cart-empty{padding:14px 10px 24px}
 .cart-empty svg{width:54px;height:54px}
@@ -1079,6 +1079,20 @@ body.hm-edit .m-float{display:none}
       .load-more{margin-top: 20px;}
 }
 
+/* cart item: price left, quantity right — ek hi line mein (sirf placement) */
+.c-item .c-row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.c-item .c-row .c-price{margin:0}
+.c-item .c-row .qty{flex:0 0 auto}
+
+/* freebies: text bar ke upar — spacing wahi, bas order ulta */
+.free p{margin:0 0 9px}
+.free p:last-of-type{margin-bottom:14px}
+.free__track{margin-bottom:0}
+
+/* do FBT sections ke beech gap */
+.fbt + .fbt{margin-top:12px}
+
+body.cart-open .hm-toast{bottom:120px}
 /* bottom quality section (home page wala) — same spacing on these pages */
 .page-content>.quality{margin-top:0}
   </style>
@@ -1414,9 +1428,21 @@ body.hm-edit .m-float{display:none}
       <!-- ===================== CART: FREQUENTLY BOUGHT TOGETHER =====================
            Cart drawer mein dikhne wale suggestion products. Har line = ek product.
            ============================================================================= -->
-      <div id="fbt-items" hidden>
+      <!-- data-title = section ki heading | data-link = "Add more value" ka link | data-link-text = us link ka text -->
+      <div id="fbt-items" class="fbt-src" data-title="Frequently Bought Together" data-link="category.html" data-link-text="Add more value" hidden>
         <div data-id="honeydew-honey" data-title="Hamdard Honey- Honeydew &amp; Blossom Honey" data-img="assets/honey.png" data-label="50 g" data-price="33.25" data-old="40"></div>
         <div data-id="non-roasted-vermicelli" data-title="Hamdard Khaalis Non-Roasted Shortcut Vermicelli" data-img="assets/Vermicelli.png" data-label="Pack of 12" data-price="1235" data-old="1440"></div>
+        <div data-id="cumin-jeera" data-title="Hamdard Khaalis Cumin (Jeera)" data-img="assets/product-cumin-whole.png" data-label="50 G" data-price="30.6" data-old="36"></div>
+        <div data-id="rooh-afza" data-title="Rooh Afza No Added Sugar" data-img="assets/product-rooh-afza-no-sugar.png" data-label="750 ml" data-price="120" data-old="150"></div>
+      </div>
+
+      <!-- ===================== CART: CLONE SECTION (same design, alag products) =====================
+           Heading data-title mein badlein. Products ki lines upar wale jaisi hi hain — add/remove kar sakte hain.
+           Aur section chahiye to ye poora block copy karke id badal dein (jaise fbt-items-3).
+           ============================================================================================ -->
+      <div id="fbt-items-2" class="fbt-src" data-title="Your wishlist items" data-link="category.html" data-link-text="View all" hidden>
+        <div data-id="haleem-masala" data-title="Hamdard Khaalis Haleem Masala" data-img="assets/product-haleem-masala.png" data-label="50 g" data-price="65" data-old="80"></div>
+        <div data-id="kachi-ghani-mustard-oil" data-title="Hamdard Kachi Ghani Mustard Oil" data-img="assets/product-mustard-oil-1l.png" data-label="1L (910g) Bottle" data-price="195" data-old="260"></div>
         <div data-id="cumin-jeera" data-title="Hamdard Khaalis Cumin (Jeera)" data-img="assets/product-cumin-whole.png" data-label="50 G" data-price="30.6" data-old="36"></div>
         <div data-id="rooh-afza" data-title="Rooh Afza No Added Sugar" data-img="assets/product-rooh-afza-no-sugar.png" data-label="750 ml" data-price="120" data-old="150"></div>
       </div>
@@ -1571,24 +1597,28 @@ body.hm-edit .m-float{display:none}
     var lines='';
     if(unlocked)lines+='<p>'+ico.tag+'<span>You just Unlocked <b>'+unlocked+' Freebies</b></span></p>';
     lines+=next?'<p>'+ico.tag+'<span>Add Products worth <b>'+rupee(Math.ceil(next.at-sub))+'</b> more to get <b>'+next.free+' Freebies</b></span></p>':'<p>'+ico.tag+'<span>Wohoo! You have unlocked the <b>maximum freebies</b></span></p>';
-    return '<div class="free"><div class="free__track"><div class="free__line"><div class="free__fill" style="width:'+p+'%"></div></div>'+dots+'</div>'+lines+'</div>';
+    /* text line(s) pehle, bar uske neeche */
+    return '<div class="free">'+lines+'<div class="free__track"><div class="free__line"><div class="free__fill" style="width:'+p+'%"></div></div>'+dots+'</div></div>';
   }
   function itemHTML(it,idx){
     var url=it.url||('product.html?id='+encodeURIComponent(it.id));
     return '<div class="c-item" data-idx="'+idx+'"><a class="c-item__img" href="'+url+'"><img src="'+esc(it.image)+'" alt="'+esc(it.title)+'"></a>'+
-      '<div><h3><a href="'+url+'">'+esc(it.title)+'</a></h3><p class="c-size">Size: '+esc(it.label)+'</p><p class="c-price">'+money(it.price*it.qty)+'</p>'+
-      '<div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity">-</button><input type="number" min="1" max="99" value="'+it.qty+'" aria-label="Quantity"><button type="button" data-q="1" aria-label="Increase quantity">+</button></div></div>'+
+      '<div><h3><a href="'+url+'">'+esc(it.title)+'</a></h3><p class="c-size">Size: '+esc(it.label)+'</p><div class="c-row"><p class="c-price">'+money(it.price*it.qty)+'</p>'+
+      '<div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity">-</button><input type="number" min="1" max="99" value="'+it.qty+'" aria-label="Quantity"><button type="button" data-q="1" aria-label="Increase quantity">+</button></div></div></div>'+
       '<button type="button" class="c-del" aria-label="Remove '+esc(it.title)+'">'+ico.trash+'</button></div>';
   }
-  function fbtList(){var inCart={};items.forEach(function(i){inCart[i.id]=1;});return $$('#fbt-items [data-id]').filter(function(el){return !inCart[el.dataset.id];}).slice(0,4);}
-  function fbtHTML(){
-    var list=fbtList();if(!list.length)return '';
-    return '<div class="fbt"><div class="fbt__head"><span class="bag"><svg viewBox="0 0 14 10" aria-hidden="true"><path d="M2 2c1 3 3 4 5 4s4-1 5-4"/></svg></span><h3>Frequently Bought Together</h3><a href="category.html">Add more value <i>›</i></a></div><div class="fbt__list">'+
-      list.map(function(el){var d=el.dataset,url='product.html?id='+encodeURIComponent(d.id);return '<div class="fbt-card"><a class="fbt-card__row" href="'+url+'"><img src="'+esc(d.img)+'" alt="" loading="lazy"><span><h4>'+esc(d.title)+'</h4><strong>'+money(d.price)+'</strong></span></a><button type="button" data-fbt="'+esc(d.id)+'">'+ico.cart+'Add to cart</button></div>';}).join('')+'</div></div>';
+  /* Frequently Bought Together + clone sections: HTML ke har .fbt-src block se ek section banta hai */
+  function fbtList(src){var inCart={};items.forEach(function(i){inCart[i.id]=1;});return $$('[data-id]',src).filter(function(el){return !inCart[el.dataset.id];}).slice(0,4);}
+  function fbtBlock(src){
+    var list=fbtList(src);if(!list.length)return '';
+    var s=src.dataset,title=s.title||'Frequently Bought Together',link=s.link||'category.html',linkText=s.linkText||'Add more value';
+    return '<div class="fbt"><div class="fbt__head"><span class="bag"><svg viewBox="0 0 14 10" aria-hidden="true"><path d="M2 2c1 3 3 4 5 4s4-1 5-4"/></svg></span><h3>'+esc(title)+'</h3><a href="'+esc(link)+'">'+esc(linkText)+' <i>›</i></a></div><div class="fbt__list">'+
+      list.map(function(el){var d=el.dataset,url='product.html?id='+encodeURIComponent(d.id);return '<div class="fbt-card"><a class="fbt-card__row" href="'+url+'"><img src="'+esc(d.img)+'" alt="" loading="lazy"><span><h4>'+esc(d.title)+'</h4><strong>'+money(d.price)+'</strong></span></a><button type="button" data-fbt="'+esc(d.id)+'" data-fbt-src="'+esc(src.id)+'">'+ico.cart+'Add to cart</button></div>';}).join('')+'</div></div>';
   }
+  function fbtHTML(){return $$('.fbt-src').map(fbtBlock).join('');}
   function cartHTML(){
     var n=count(),sub=subtotal();
-    var head='<div class="cart__head">'+ico.cartBig+'<h2>Shopping cart ('+n+')</h2><button type="button" class="x-btn cart__close" data-cart-close aria-label="Close cart">'+ico.x+'</button></div>';
+    var head='<div class="cart__head">'+ico.cartBig+'<h2>Cart Item ('+n+')</h2><button type="button" class="x-btn cart__close" data-cart-close aria-label="Close cart">'+ico.x+'</button></div>';
     if(!items.length)return head+'<div class="cart__scroll">'+freebieHTML(0)+'<div class="cart-empty"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><h3>Your cart is empty</h3><p>Add products worth '+rupee(TIERS[0].at)+' to unlock free gifts.</p><a class="btn-red" href="category.html" data-cart-close>Continue Shopping</a></div>'+fbtHTML()+'</div>';
     return head+'<div class="cart__scroll">'+freebieHTML(sub)+items.map(itemHTML).join('')+fbtHTML()+'</div>'+
       '<div class="cart__foot"><div class="cart__sub"><span>SubTotal</span><strong>'+money(sub)+'</strong></div>'+
@@ -1613,7 +1643,7 @@ body.hm-edit .m-float{display:none}
       if(qb){setQty(idx,items[idx].qty+(+qb.dataset.q));return;}
       if(t.closest('.c-del')){var nm=items[idx].title;setQty(idx,0);toast(nm+' removed');return;}}
     var fb=t.closest('[data-fbt]');
-    if(fb){var el=$('#fbt-items [data-id="'+fb.dataset.fbt+'"]');if(el){var d=el.dataset;addItem({id:d.id,title:d.title,image:d.img,label:d.label,price:parseFloat(d.price)},1);toast('Added to cart');}return;}
+    if(fb){var el=$('#'+(fb.dataset.fbtSrc||'fbt-items')+' [data-id="'+fb.dataset.fbt+'"]');if(el){var d=el.dataset;addItem({id:d.id,title:d.title,image:d.img,label:d.label,price:parseFloat(d.price)},1);toast('Added to cart');}return;}
     if(t.closest('[data-pin-toggle]')){var f=t.closest('.cart__pin').querySelector('[data-pin-form]');f.classList.toggle('show');if(f.classList.contains('show'))f.querySelector('input').focus();return;}
     var ac=t.closest('.product-card .add-cart, .product-card .buy-now');
     if(ac&&!ac.disabled){var c=ac.closest('.product-card');addItem(itemFromCard(c),1);
@@ -1634,7 +1664,7 @@ body.hm-edit .m-float{display:none}
   try{var _e=JSON.parse(localStorage.getItem(IMG_KEY)||'null');if(_e&&_e.products)EDITS=_e;}catch(_){}
   var banner=$('#cat-banner-img');if(banner)banner.dataset.orig=banner.getAttribute('src');
   cards.forEach(function(c){var m=c.querySelector('.img-main');m.dataset.orig=m.getAttribute('src');var h=c.querySelector('.img-hover');c.dataset.origHover=h?h.getAttribute('src'):'';});
-  $$('#fbt-items [data-id]').forEach(function(el){el.dataset.origImg=el.dataset.img;});
+  $$('.fbt-src [data-id]').forEach(function(el){el.dataset.origImg=el.dataset.img;});
   function hoverBg(a,src){if(src)a.style.setProperty('--hover-bg','url("'+String(src).replace(/"/g,'%22')+'")');else a.style.removeProperty('--hover-bg');}
   cards.forEach(function(c){var h=c.querySelector('.img-hover');if(h)hoverBg(c.querySelector('.product-card__visual'),h.getAttribute('src'));});
   function setHover(c,src){var a=c.querySelector('.product-card__visual'),h=c.querySelector('.img-hover');hoverBg(a,src);
@@ -1643,7 +1673,7 @@ body.hm-edit .m-float{display:none}
   function applyEdits(){
     if(banner)banner.src=EDITS.banner||banner.dataset.orig;
     cards.forEach(function(c){var e=EDITS.products[c.dataset.id]||{};c.querySelector('.img-main').src=e.image||c.querySelector('.img-main').dataset.orig;setHover(c,e.hover!==undefined?e.hover:c.dataset.origHover);});
-    $$('#fbt-items [data-id]').forEach(function(el){var e=EDITS.products[el.dataset.id]||{};el.dataset.img=e.image||el.dataset.origImg;});
+    $$('.fbt-src [data-id]').forEach(function(el){var e=EDITS.products[el.dataset.id]||{};el.dataset.img=e.image||el.dataset.origImg;});
     items.forEach(function(it){var e=EDITS.products[it.id];var c=cards.filter(function(x){return x.dataset.id===it.id;})[0];
       if(e&&e.image)it.image=e.image;else if(c)it.image=c.querySelector('.img-main').dataset.orig;});
     save();renderCart();
@@ -1678,7 +1708,7 @@ body.hm-edit .m-float{display:none}
       if(t.type==='banner')return {img:banner.getAttribute('src'),hover:null,title:'Category page ka top banner (best size 1440 × 415)'};
       var c=cards.filter(function(x){return x.dataset.id===t.id;})[0];
       if(c){var h=c.querySelector('.img-hover');return {img:c.querySelector('.img-main').getAttribute('src'),hover:h?h.getAttribute('src'):'',title:cardTitle(c)};}
-      var el=$('#fbt-items [data-id="'+t.id+'"]');return {img:el.dataset.img,hover:null,title:el.dataset.title};
+      var el=$('.fbt-src [data-id="'+t.id+'"]');return {img:el.dataset.img,hover:null,title:el.dataset.title};
     }
     function field(name,label,cur){return '<div class="hm-field"><label>'+label+'</label><div class="hm-up"><label class="file-btn">⬆ Upload<input type="file" accept="image/*" data-file="'+name+'"></label><input type="url" placeholder="ya image ka link / path paste karein" data-url="'+name+'"><span class="fname" data-fname="'+name+'">'+(cur?'Abhi: '+esc(cur.indexOf('data:')===0?'(uploaded image)':cur):'')+'</span></div></div>';}
     function open(t){
@@ -1692,7 +1722,7 @@ body.hm-edit .m-float{display:none}
     function close(){modal.classList.remove('open');target=null;}
     function extraList(){
       modal.innerHTML='<div class="hm-modal__box"><h3>Cart / Frequently Bought Together</h3><p class="sub">Ye products sirf cart mein dikhte hain. Jis ki image badalni hai use chuniye.</p><div class="hm-extra-list">'+
-        $$('#fbt-items [data-id]').map(function(el){return '<button type="button" data-pick="'+esc(el.dataset.id)+'"><img src="'+esc(el.dataset.img)+'" alt="">'+esc(el.dataset.title)+'</button>';}).join('')+
+        $$('.fbt-src [data-id]').filter(function(el,i,a){return a.findIndex(function(x){return x.dataset.id===el.dataset.id;})===i;}).map(function(el){return '<button type="button" data-pick="'+esc(el.dataset.id)+'"><img src="'+esc(el.dataset.img)+'" alt="">'+esc(el.dataset.title)+'</button>';}).join('')+
         '</div><div class="hm-modal__foot"><button type="button" class="btn-ghost m-cancel">Close</button></div></div>';
       modal.classList.add('open');target={type:'list'};
     }
