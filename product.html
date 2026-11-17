@@ -1102,6 +1102,17 @@ body.cart-open .hm-toast{bottom:120px}
   .g-thumbs .swiper-slide{aspect-ratio:auto!important;height:calc((min(90vw,560px) - 28px) / 4.5)!important;max-height:110px}
   .g-thumbs .swiper-slide img{width:100%!important;height:100%!important;object-fit:cover;display:block}
 }
+
+/* =====================================================================
+   FIX: main image — width poori, section ek screen mein, image KABHI nahi katti.
+   Image poori dikhti hai (contain); bachi hui side ki jagah usi image ke
+   blur version se bhar jaati hai (JS har slide par --slide-bg set karta hai),
+   isliye safed khaali patti nahi dikhti.
+   ===================================================================== */
+.g-main .swiper-slide{position:relative;overflow:hidden;background:#fff}
+.g-main .swiper-slide::before{content:"";position:absolute;inset:-10%;z-index:0;background-image:var(--slide-bg);background-size:cover;background-position:center;filter:blur(22px) saturate(1.1);transform:scale(1.05);pointer-events:none}
+.g-main .swiper-zoom-container{position:relative;z-index:1;width:100%;height:100%}
+.g-main .swiper-zoom-container img,.g-main .swiper-slide>img{width:100%!important;height:100%!important;object-fit:contain!important;object-position:center center}
 </style>
   <style id="btn-one-line-fix">
     /* Add to Cart + Buy now: hamesha ek line mein, chhoti screens par font/icon scale ho jayega */
@@ -1574,6 +1585,8 @@ body.cart-open .hm-toast{bottom:120px}
     }
     /* har image ko zoom container mein daalna + pehli ke baad lazy load */
     $$('.swiper-slide',mainWrap).forEach(function(sl,k){var img=sl.querySelector('img');if(!img)return;if(k)img.setAttribute('loading','lazy');
+      /* side ki khaali jagah bharne ke liye usi image ka blur background */
+      sl.style.setProperty('--slide-bg','url("'+img.getAttribute('src').replace(/"/g,'%22')+'")');
       if(!img.parentNode.classList.contains('swiper-zoom-container')){var z=document.createElement('div');z.className='swiper-zoom-container';img.parentNode.insertBefore(z,img);z.appendChild(img);}});
     /* thumbnails apne aap */
     $('#g-thumb-wrap').innerHTML=$$('.swiper-slide img',mainWrap).map(function(img){return '<div class="swiper-slide"><img src="'+img.getAttribute('src')+'" alt="" aria-hidden="true"></div>';}).join('');
@@ -1615,17 +1628,27 @@ body.cart-open .hm-toast{bottom:120px}
     (function(){
       var pdp=$('.pdp'),info=$('.pi'),grid=$('.pdp__grid');if(!pdp||!info||!grid)return;
       var raf=0;
+      /* pehli (main) image ka width/height ratio — isi se box ki width banti hai, taaki side mein space na aaye */
+      var firstImg=$('#g-main-wrap .swiper-slide img');
+      function imgRatio(){
+        var r=firstImg&&firstImg.naturalWidth&&firstImg.naturalHeight?firstImg.naturalWidth/firstImg.naturalHeight:1;
+        return Math.max(.5,Math.min(2,r));
+      }
+      if(firstImg&&!firstImg.complete)firstImg.addEventListener('load',function(){fit();});
       function fit(){
         raf=0;
-        var P=pdp.style;
+        var P=pdp.style,ratio=imgRatio();
         if(window.innerWidth<901){
           ['--pdp-h','--g-w','--t-w','--g-gap','--k'].forEach(function(v){P.removeProperty(v);});pdp.classList.remove('is-tight');
           /* phone/tablet: image itni badi ki pehli screen mein image + naam + price dikhe */
-          var gm=$('.g-main'),price=$('.pi__price');if(!gm||!price)return;
-          var maxW=gm.parentNode.getBoundingClientRect().width,gh2=Math.min(maxW*1.02,620);
-          P.setProperty('--g-h',Math.round(gh2)+'px');
+          var gm=$('.g-main'),price=$('.pi__price'),gal=$('.gallery');if(!gm||!price||!gal)return;
+          var maxW=gal.getBoundingClientRect().width-(window.innerWidth>700?100:0);   /* tablet: thumbs column (88+12) minus */
+          var gh2=Math.min(maxW/ratio,620);
+          P.setProperty('--g-h',Math.round(gh2)+'px');P.setProperty('--g-w',Math.round(Math.min(maxW,gh2*ratio))+'px');
           var over=price.getBoundingClientRect().bottom+window.scrollY+12-window.innerHeight;
-          if(over>0&&gh2-over>=maxW*0.75)P.setProperty('--g-h',Math.round(gh2-over)+'px');
+          if(over>0&&gh2-over>=(maxW/ratio)*0.75){gh2-=over;P.setProperty('--g-h',Math.round(gh2)+'px');}
+          /* width = height × ratio -> image box ke andar left/right khaali jagah nahi */
+          P.setProperty('--g-w',Math.round(Math.min(maxW,gh2*ratio))+'px');
           return;}
         var top=Math.max(0,pdp.getBoundingClientRect().top+window.scrollY);
         var screenH=Math.max(340,window.innerHeight-top);            /* header ke neeche bachi screen */
@@ -1641,10 +1664,13 @@ body.cart-open .hm-toast{bottom:120px}
         /* dono column barabar (50/50): image wale column ki width se height ki limit */
         var gridW=Math.min(pageW,1200*Math.max(1,k0)),colGap=Math.max(24,36*k0);
         var mainW=(gridW-colGap)/2-tW-gap;
-        var gh=Math.round(Math.max(240,Math.min(availH,mainW*1.12)));
+        /* height screen mein fit (section ek view mein), width poori column */
+        var gh=Math.round(Math.max(240,Math.min(availH,mainW/ratio)));
+        /* box ki width = height × image ratio (column se zyada nahi) -> side mein space nahi */
+        var gw=Math.round(Math.min(mainW,gh*ratio));
         var k=Math.max(.7,Math.min(1.35,gh/455));
         P.setProperty('--k',k.toFixed(3));P.setProperty('--t-w',tW+'px');P.setProperty('--g-gap',gap+'px');
-        P.setProperty('--g-h',gh+'px');P.setProperty('--g-w',Math.round(gh*0.9)+'px');
+        P.setProperty('--g-h',gh+'px');P.setProperty('--g-w',gw+'px');
         /* text image se lamba ho gaya to thoda chhota karo */
         pdp.classList.remove('is-tight');
         var tries=0;while(info.offsetHeight>availH&&tries<8){k-=.04;P.setProperty('--k',Math.max(.6,k).toFixed(3));if(tries===1)pdp.classList.add('is-tight');tries++;}
