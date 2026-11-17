@@ -580,6 +580,20 @@
       .benefit{gap:2vw}.benefit strong{font-size:11px}.benefit small{font-size:8.5px}
     }
   </style>
+  <style id="btn-one-line-fix">
+    /* Add to Cart + Buy now: hamesha ek line mein, chhoti screens par font/icon scale ho jayega */
+    .product-actions{container-type:inline-size;min-width:0}
+    .product-actions button{min-width:0;white-space:nowrap;overflow:hidden;line-height:1.1}
+    @media(max-width:700px){
+      .product-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+      .product-actions button{padding-left:3px;padding-right:3px;gap:3px;font-size:clamp(7px,5.3cqi,12px)}
+      .product-actions button svg{width:1.1em;height:1.1em;flex:0 0 auto}
+    }
+      /* Category cards: naam ek line mein, card ki width ke hisaab se font scale */
+    .category-card{container-type:inline-size}
+    .category-card strong{white-space:nowrap;overflow:hidden;line-height:1.2;font-size:clamp(8px,7.5cqi,14px)}
+    .category-card small{white-space:nowrap}
+  </style>
 </head>
 <body>
   <div class="announcement"><div class="announcement__inner">

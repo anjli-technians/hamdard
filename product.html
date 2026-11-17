@@ -894,7 +894,7 @@ body.cart-open{overflow:hidden}
   .pi__type{margin-top:4px;font-size:11px}
   .pi__title{font-size:22px;margin-bottom:10px}
   .pi__meta{gap:8px;margin-bottom:16px}
-  .pill{height:28px;font-size:11px;padding:0 9px}
+  .pill{height:25px;font-size:9px;padding:0 5px}
   .pi__price strong{font-size:24px}
   .pi__price del{font-size:14px}
   .pi__tax{margin-bottom:18px}
@@ -1103,6 +1103,24 @@ body.cart-open .hm-toast{bottom:120px}
   .g-thumbs .swiper-slide img{width:100%!important;height:100%!important;object-fit:cover;display:block}
 }
 </style>
+  <style id="btn-one-line-fix">
+    /* Add to Cart + Buy now: hamesha ek line mein, chhoti screens par font/icon scale ho jayega */
+    .product-actions{container-type:inline-size;min-width:0}
+    .product-actions button{min-width:0;white-space:nowrap;overflow:hidden;line-height:1.1}
+    @media(max-width:700px){
+      .product-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+      .product-actions button{padding-left:3px;padding-right:3px;gap:3px;font-size:clamp(7px,5.3cqi,12px)}
+      .product-actions button svg{width:1.1em;height:1.1em;flex:0 0 auto}
+    }
+    @media(max-width:700px){
+      .sticky-buy .btn-red,.buy-row .btn-red{white-space:nowrap;min-width:0;overflow:hidden}
+      .sticky-buy .btn-red{gap:4px;font-size:clamp(10px,3.4vw,13px)}
+    }
+      /* Category cards: naam ek line mein, card ki width ke hisaab se font scale */
+    .category-card{container-type:inline-size}
+    .category-card strong{white-space:nowrap;overflow:hidden;line-height:1.2;font-size:clamp(8px,7.5cqi,14px)}
+    .category-card small{white-space:nowrap}
+  </style>
 </head>
 <body data-page="product">
   <div class="announcement"><div class="announcement__inner">
