@@ -425,8 +425,6 @@
         font-size:1.1vw;
         line-height:1.4;color:#8b8b8b;
       }
-      /* slide 2: logo aur heading ka overlap kam karne ke liye heading neeche */
-      .hero-track>.hero-slide:nth-child(2) .hero-copy{top:24%}
     }
 
     /* mobile: gradient upar se, kyunki text center me hai */
@@ -528,21 +526,17 @@
     /* =====================================================================
        HERO text fix — text logo par na chadhe
        ===================================================================== */
-    /* DESKTOP: banner 3 & 4 (Honey / Saffron) — text logo ke neeche, badge se pehle khatam */
+    /* DESKTOP: SAARE banners (1-4) — last (Saffron) banner jaisa placement:
+       text logo ke neeche, vertically beech me, badge se pehle khatam */
     @media(min-width:1101px){
-      .hero-track>.hero-slide:nth-child(3) .hero-copy,
-      .hero-track>.hero-slide:nth-child(4) .hero-copy{top:31%;width:36%}
-      .hero-track>.hero-slide:nth-child(3) .hero-copy h1,
-      .hero-track>.hero-slide:nth-child(4) .hero-copy h1{font-size:3.3vw;line-height:1.05;margin:0 0 1.2vw}
-      .hero-track>.hero-slide:nth-child(3) .hero-copy p,
-      .hero-track>.hero-slide:nth-child(4) .hero-copy p{max-width:30vw;margin:0 0 1.4vw}
+      .hero-track>.hero-slide .hero-copy{top:31%;width:36%}
+      .hero-track>.hero-slide .hero-copy h1{font-size:3.3vw;line-height:1.05;margin:0 0 1.2vw}
+      .hero-track>.hero-slide .hero-copy p{max-width:30vw;margin:0 0 1.4vw}
     }
     /* TABLET (701–1100): same idea, chhote size me */
     @media(min-width:701px) and (max-width:1100px){
-      .hero-track>.hero-slide:nth-child(3) .hero-copy,
-      .hero-track>.hero-slide:nth-child(4) .hero-copy{top:30%;width:36%}
-      .hero-track>.hero-slide:nth-child(3) .hero-copy h1,
-      .hero-track>.hero-slide:nth-child(4) .hero-copy h1{font-size:3.2vw;line-height:1.05}
+      .hero-track>.hero-slide .hero-copy{top:30%;width:36%}
+      .hero-track>.hero-slide .hero-copy h1{font-size:3.2vw;line-height:1.05}
     }
     /* PHONE: reference jaisa — banner lagbhag square, logo upar corners me,
        uske neeche heading → line → Shop Now beech me; sab banner height (--hh) ke saath scale */
@@ -555,10 +549,10 @@
       .hero-slide .hero-copy h1,
       .hero-slide .hero-copy p,
       .hero-slide .hero-shop-button{position:static;transform:none;left:auto;top:auto}
-      .hero-slide .hero-copy h1{width:100%;font-size:20px;line-height:1.05;letter-spacing:-.5px;margin:0 0 calc(var(--hh) * .018)}
+      .hero-slide .hero-copy h1{width:100%;font-size:20px;line-height:1.05;letter-spacing:-.5px;margin:0 0 calc(var(--hh) * .018);color:#ababab;}
       .hero-slide .hero-copy h1 br{display:none}
       .hero-slide .hero-copy p{width:100%;max-width:min(320px,88%);padding:0;font-size:max(10px,min(3.6vw,calc(var(--hh) * .032)));line-height:1.35;margin:0 0 calc(var(--hh) * .028);color: #8b8b8b;}
-      .hero-slide .hero-shop-button{white-space:nowrap;font-size:max(11px,min(3.6vw,calc(var(--hh) * .032)));padding:calc(var(--hh) * .016) calc(var(--hh) * .05);border-radius:4px}
+      .hero-slide .hero-shop-button{white-space:nowrap;font-size:max(11px,min(3.6vw,calc(var(--hh) * .032)));padding:3px 15px;border-radius:4px}
       /* offer badge: right side, button ke neeche wali line par (reference jaisa) */
       .hero-slide .hero-mobile-badge{left:auto;right:3%;top:52%;transform:none;width:min(26%,calc(var(--hh) * .25))}
     }
