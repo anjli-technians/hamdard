@@ -853,7 +853,7 @@ body.cart-open{overflow:hidden}
    ===================================================================== */
 @media(max-width:700px){
   /* category */
-  .cat-hero img{aspect-ratio:375/220;object-position:18% center}
+  .cat-hero img{aspect-ratio:auto;height:auto;object-fit:contain;object-position:center}
   .cat-hero__copy{right:5vw;top:auto;bottom:16px;transform:none;background:#ffffffd9;padding:8px 14px;border-radius:8px}
   .cat-hero__copy h1{font-size:28px}
   .cat-hero__copy p{display:none}
@@ -1165,7 +1165,11 @@ body.cart-open .hm-toast{bottom:120px}
   <nav class="main-nav" aria-label="Main navigation"><div class="nav-all-wrap"><a class="nav-all" href="#categories"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="5" r="1.3"/><circle cx="12" cy="5" r="1.3"/><circle cx="19" cy="5" r="1.3"/><circle cx="5" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="19" cy="12" r="1.3"/><circle cx="5" cy="19" r="1.3"/><circle cx="12" cy="19" r="1.3"/><circle cx="19" cy="19" r="1.3"/></svg>All Categories<svg class="chev" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5l3 3 3-3"/></svg></a><div class="mega"><div class="mega__panel"><a class="mega__top" href="#products">Shop All ›</a><a class="mega__top red" href="#products">Best Sellers</a><div class="mega__sep"></div><div class="mega__item"><a class="mega__link" href="#offers">Offers</a></div><div class="mega__item"><a class="mega__link" href="#beverages">Beverages<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5l3.5 3.5L3 8.5"/></svg></a><div class="mega__fly"><a href="#beverages">Syrups & Concentrates</a><a href="#beverages">Dairy</a><a href="#beverages">Ready to Drink</a><a href="#beverages">Coconut Water</a><a href="#beverages">Glucose</a></div></div><div class="mega__item"><a class="mega__link" href="#spices">Spices<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5l3.5 3.5L3 8.5"/></svg></a><div class="mega__fly"><a href="#spices">Blended Spices</a><a href="#spices">Powdered Spices</a><a href="#spices">Whole Spices</a><a href="#spices">Saffron & Hing</a></div></div><div class="mega__item"><a class="mega__link" href="#edible-oil">Edible Oil<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 1.5l3.5 3.5L3 8.5"/></svg></a><div class="mega__fly"><a href="#edible-oil">Olive Pomace Oil</a><a href="#edible-oil">Mustard Oil</a></div></div><div class="mega__item"><a class="mega__link" href="#honey">Honey</a></div><div class="mega__item"><a class="mega__link" href="#ready-to-cook">Ready to cook</a></div><div class="mega__item"><a class="mega__link" href="#health-care">Health Care</a></div><div class="mega__item"><a class="mega__link" href="#combos">Combos</a></div></div></div></div><a class="nav-link" href="#offers"><span class="nav-badge">Upto 30%</span><img class="nav-icon" src="assets/icon-offer.png" alt=""> Offers</a><a class="nav-link" href="#beverages"><img class="nav-icon" src="assets/Beverages.png" alt=""> Beverages</a><a class="nav-link" href="#spices"><img class="nav-icon" src="assets/icon-spices.png" alt=""> Spices</a><a class="nav-link" href="#edible-oil"><img class="nav-icon" src="assets/icon-edible-oil.png" alt=""> Edible Oil</a><a class="nav-link" href="#honey"><img class="nav-icon" src="assets/icon-honey.png" alt=""> Honey</a><a class="nav-link" href="#ready-to-cook"><img class="nav-icon" src="assets/icon-ready-to-cook.png" alt=""> Ready to cook</a><a class="nav-link" href="#health-care"><img class="nav-icon" src="assets/icon-health.png" alt=""> Health Care</a><a class="nav-link" href="#combos"><img class="nav-icon" src="assets/icon-combos.png" alt=""> Combos</a><a class="nav-link" href="#contact"><img class="nav-icon" src="assets/icon-contact.png" alt=""> Contact</a><a class="track-order" href="#delivery"><img class="nav-icon" src="assets/cart.png" alt=""> Track Order</a></nav>
   <main id="top">
     <section class="cat-hero" aria-label="Edible Oil">
-      <img id="cat-banner-img" src="assets/category-banner.png" alt="Hamdard edible oils — Kachi Ghani Mustard Oil, Select Mustard Oil and Olive Pomace Oil" fetchpriority="high"> 
+      <picture>
+      <!-- mobile (700px tak) par alag banner — 750 × 444 -->
+      <source media="(max-width:700px)" srcset="assets/category-banner-mobile.png">
+      <img id="cat-banner-img" src="assets/category-banner.png" alt="Hamdard edible oils — Kachi Ghani Mustard Oil, Select Mustard Oil and Olive Pomace Oil" fetchpriority="high">
+      </picture>
     </section>
 
     <section class="filter-bar" aria-label="Filter and sort products">
@@ -1673,7 +1677,7 @@ body.cart-open .hm-toast{bottom:120px}
     if(src){if(!h){h=document.createElement('img');h.className='img-hover';h.alt='';h.setAttribute('aria-hidden','true');a.appendChild(h);}h.src=src;a.classList.add('has-hover');}
     else{if(h)h.remove();a.classList.remove('has-hover');}}
   function applyEdits(){
-    if(banner)banner.src=EDITS.banner||banner.dataset.orig;
+    if(banner){banner.src=EDITS.banner||banner.dataset.orig;var msrc=banner.parentNode.querySelector('source');if(msrc){if(!msrc.dataset.orig)msrc.dataset.orig=msrc.getAttribute('srcset');msrc.srcset=EDITS.banner||msrc.dataset.orig;}}
     cards.forEach(function(c){var e=EDITS.products[c.dataset.id]||{};c.querySelector('.img-main').src=e.image||c.querySelector('.img-main').dataset.orig;setHover(c,e.hover!==undefined?e.hover:c.dataset.origHover);});
     $$('.fbt-src [data-id]').forEach(function(el){var e=EDITS.products[el.dataset.id]||{};el.dataset.img=e.image||el.dataset.origImg;});
     items.forEach(function(it){var e=EDITS.products[it.id];var c=cards.filter(function(x){return x.dataset.id===it.id;})[0];
