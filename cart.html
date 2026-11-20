@@ -959,6 +959,155 @@ body.cart-open{overflow:hidden}
 /* bottom quality section (home page wala) — same spacing on these pages */
 .page-content>.quality{margin-top:0}
   </style>
+
+<style id="hm-cart-figma">
+/* =====================================================================
+   CART PAGE — Figma table layout (desktop + mobile)
+   ===================================================================== */
+.cart-page{background:#fff;padding:56px 0 40px}
+.cart-page__box{width:min(1200px,calc(100% - 48px));max-width:none;margin:0 auto;background:none;border-radius:0;box-shadow:none;overflow:visible}
+.cart-page .cart{display:block;height:auto}
+.ct{display:grid;grid-template-columns:minmax(0,1fr) 387px;gap:50px;align-items:start;font-family:'Poppins',Arial,sans-serif;color:#171717}
+.ct-grid{display:grid;grid-template-columns:72px minmax(0,1fr) 90px 104px 100px 32px;column-gap:14px;align-items:center;padding:0 20px 0 24px}
+.ct-head{background:#e80000;color:#fff;border-radius:8px;height:58px;font-weight:600;font-size:16px}
+.ct-head .ct-h-prod{grid-column:1/3;padding-left:7px}
+.ct-head span{text-align:center}
+.ct-head .ct-h-prod{text-align:left}
+.ct-row{padding-top:26px;padding-bottom:26px;border-bottom:1px solid #cfcfcf}
+.ct-img{display:flex;align-items:center;justify-content:center;width:72px;height:72px;border:1px solid #111;border-radius:6px;background:#fff;overflow:hidden}
+.ct-img img{width:78%;height:78%;object-fit:contain}
+.ct-name{min-width:0}
+.ct-name a{display:block;font-size:16px;font-weight:400;line-height:1.25}
+.ct-name a:hover{color:var(--red)}
+.ct-name small{display:block;margin-top:3px;font-size:10px;color:#6b6b6b;line-height:1.3}
+.ct-price,.ct-sub{text-align:center;font-size:16px;font-weight:500;white-space:nowrap}
+.ct-qty{display:flex;justify-content:center}
+.ct-qty .qty{display:inline-flex;align-items:center;width:90px;height:31px;border:1px solid #333;border-radius:20px;background:#fff;overflow:hidden}
+.ct-qty .qty button{flex:0 0 22px;width:22px;height:100%;border:0;background:none;font-size:13px;line-height:1;cursor:pointer;padding:0}
+.ct-qty .qty input{flex:1;min-width:0;width:100%;height:100%;border:0;border-left:1px solid #333;border-right:1px solid #333;border-radius:0;text-align:center;font-size:13px;background:#fff;padding:0;outline:0}
+.ct-del{width:25px;height:25px;border:0;border-radius:50%;background:#e80000;display:grid;place-items:center;cursor:pointer;padding:0;justify-self:end}
+.ct-del svg{width:12px;height:12px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;pointer-events:none}
+.ct-del:hover{background:#b80000}
+.ct-clear{display:flex;justify-content:flex-end;padding-top:26px}
+.ct-clear button{border:0;background:none;padding:0;font-size:15px;font-weight:500;text-decoration:underline;cursor:pointer;color:#111}
+.ct-clear button:hover{color:var(--red)}
+.ct-sum{border:1px solid #bdbdbd;border-radius:8px;background:#fff;overflow:hidden}
+.ct-sum h2{margin:0;padding:17px 20px;font-family:'Poppins',sans-serif;font-size:20px;font-weight:500;border-bottom:1px solid #c8c8c8;line-height:1.3}
+.ct-sum__body{padding:14px 20px 20px}
+.ct-line{display:flex;justify-content:space-between;align-items:center;min-height:40px;font-size:17px}
+.ct-line span{color:#707070}
+.ct-line b{font-weight:500;color:#111;white-space:nowrap}
+.ct-sum hr{border:0;border-top:1px solid #c8c8c8;margin:22px 0 14px}
+.ct-line--total{min-height:46px}
+.ct-btn{display:flex;align-items:center;justify-content:center;width:100%;height:58px;border-radius:10px;font-size:20px;font-weight:600;color:#fff;background:#e80000}
+.ct-btn:hover{background:#c40000}
+.ct-sum .ct-btn{margin-top:18px}
+.ct-btn--out{display:none}
+.ct-empty{grid-column:1/-1;text-align:center;padding:60px 20px}
+.ct-empty h3{margin:12px 0 6px;font-weight:500}
+.ct-empty p{margin:0 0 18px;color:#777}
+.ct-empty a{display:inline-flex;height:44px;padding:0 28px;border-radius:24px}
+.ct-empty svg{width:64px;height:64px;fill:none;stroke:#e0b5b8;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+
+@media(max-width:1100px){
+  .ct{grid-template-columns:minmax(0,1fr);gap:28px}
+  .ct-sum{max-width:520px}
+}
+@media(max-width:700px){
+  .cart-page{padding:12px 0 24px}
+  .cart-page__box{width:calc(100% - 28px)}
+  .ct{gap:0}
+  .ct-grid{grid-template-columns:44px minmax(0,1fr) 44px 50px 54px 22px;column-gap:5px;padding:0 10px}
+  .ct-head{height:36px;font-size:8px;font-weight:600;border-radius:7px}
+  .ct-head .ct-h-prod{padding-left:0}
+  .ct-row{padding-top:19px;padding-bottom:19px;border-bottom:0}
+  .ct-img{width:44px;height:44px;border-radius:4px}
+  .ct-name a{font-size:11px;font-weight:500;line-height:1.2}
+  .ct-name small{font-size:7px;margin-top:2px}
+  .ct-price,.ct-sub{font-size:10.5px;font-weight:600}
+  .ct-qty .qty{width:50px;height:20px}
+  .ct-qty .qty button{flex:0 0 14px;width:14px;font-size:10px}
+  .ct-qty .qty input{font-size:9px}
+  .ct-del{width:16px;height:16px}
+  .ct-del svg{width:8px;height:8px}
+  .ct-clear{padding:6px 0 22px}
+  .ct-clear button{font-size:10px;font-weight:500}
+  .ct-sum{margin:0 10px;border-radius:8px;max-width:none}
+  .ct-sum h2{background:#fbf3f2;padding:11px 16px;font-size:16px;font-weight:500}
+  .ct-sum__body{padding:10px 16px 14px}
+  .ct-line{min-height:29px;font-size:14px}
+  .ct-line span{color:#555}
+  .ct-line b{font-size:15px}
+  .ct-sum hr{margin:12px 0 8px}
+  .ct-line--total{min-height:36px}
+  .ct-line--total span,.ct-line--total b{font-size:15px;font-weight:500}
+  .ct-sum .ct-btn--in{display:none}
+  .ct-btn--out{display:flex;margin:24px 10px 0;width:calc(100% - 20px);height:52px;border-radius:8px;font-size:15px}
+}
+</style>
+
+<style id="hm-cart-drawer-desktop">
+@media(min-width:701px){
+  .cart-drawer__box{right:auto;bottom:auto;left:50%;top:50%;width:min(1200px,calc(100% - 48px));max-height:92vh;overflow-y:auto;border-radius:16px;background:#fff;transform:translate(-50%,-46%);opacity:0;transition:transform .3s ease,opacity .3s ease}
+  .cart-drawer.open .cart-drawer__box{transform:translate(-50%,-50%);opacity:1}
+  .cart-drawer__box .cart{display:block;height:auto;padding:22px 28px 32px}
+  .ct-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;font-family:'Poppins',sans-serif}
+  .ct-top h2{margin:0;font-family:'Poppins',sans-serif;font-size:22px;font-weight:500}
+  .cart-drawer__box .ct{grid-template-columns:minmax(0,1fr) 360px;gap:36px}
+}
+@media(min-width:701px) and (max-width:1000px){
+  .cart-drawer__box .ct{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+
+<style id="hm-cart-compact">
+/* only Figma sections on cart page: no extra quality block */
+body.page-cart .page-content{display:none}
+@media(min-width:701px){
+  .cart-page{padding:26px 0 36px}
+  .ct-head{height:52px;font-size:15px}
+  .ct-row{padding-top:18px;padding-bottom:18px}
+  .ct-clear{padding-top:18px}
+  .ct-left+aside,.ct>aside{position:sticky;top:14px;align-self:start}
+  .ct-sum h2{padding:12px 20px;font-size:18px}
+  .ct-sum__body{padding:8px 20px 16px}
+  .ct-line{min-height:32px;font-size:15px}
+  .ct-sum hr{margin:12px 0 8px}
+  .ct-line--total{min-height:38px}
+  .ct-sum .ct-btn{height:50px;font-size:18px;margin-top:12px}
+}
+</style>
+
+<style id="hm-view-cart">
+.cart__view{display:flex;align-items:center;justify-content:center;margin:10px 16px 0;height:46px;border:1.5px solid var(--red);border-radius:30px;color:var(--red);font-size:16px;font-weight:600;background:#fff;transition:background .2s,color .2s}
+.cart__view:hover{background:var(--red);color:#fff}
+.cart__view+.cart__checkout{margin-top:8px}
+.ct-top__r{display:flex;align-items:center;gap:14px}
+.ct-view{display:inline-flex;align-items:center;justify-content:center;height:38px;padding:0 20px;border:1.5px solid #e80000;border-radius:8px;color:#e80000;font-size:14px;font-weight:600;transition:background .2s,color .2s}
+.ct-view:hover{background:#e80000;color:#fff}
+</style>
+
+<style id="hm-cart-phone-fit">
+@media(max-width:700px){
+  .cart-page__box{width:calc(100% - 20px)}
+  .ct-grid{grid-template-columns:40px minmax(0,1fr) 44px 46px 50px 18px;column-gap:4px;padding:0 8px}
+  .ct-head{height:34px;font-size:8px}
+  .ct-head span{min-width:0}
+  .ct-row{padding-top:16px;padding-bottom:16px}
+  .ct-img{width:40px;height:40px}
+  .ct-name{min-width:0;overflow:hidden}
+  .ct-name a{font-size:10px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;overflow-wrap:anywhere}
+  .ct-name small{font-size:7px;line-height:1.25;overflow-wrap:anywhere}
+  .ct-price,.ct-sub{font-size:9.5px;min-width:0}
+  .ct-qty .qty{width:46px;height:20px}
+  .ct-qty .qty button{flex:0 0 12px;width:12px;font-size:10px}
+  .ct-qty .qty input{font-size:8.5px}
+  .ct-del{width:18px;height:18px}
+  .ct-del svg{width:9px;height:9px}
+  .ct-sum{margin:0}
+  .ct-btn--out{margin:20px 0 0;width:100%}
+}
+</style>
 </head>
 <body data-page="cart" class="page-cart">
   <div class="announcement"><div class="announcement__inner">
@@ -1143,7 +1292,42 @@ body.cart-open{overflow:hidden}
     return '<div class="fbt"><div class="fbt__head"><span class="bag"><svg viewBox="0 0 14 10" aria-hidden="true"><path d="M2 2c1 3 3 4 5 4s4-1 5-4"/></svg></span><h3>Frequently Bought Together</h3><a href="category.html">Add more value ›</a></div><div class="fbt__list">'+
       list.map(function(id){var p=BY_ID[id],v=p.variants[0];return '<div class="fbt-card"><a class="fbt-card__row" href="product.html?id='+id+'"><img src="'+p.image+'" alt="" loading="lazy"><span><h4>'+esc(p.title)+'</h4><strong>'+money(v.price)+'</strong></span></a><button type="button" data-fbt="'+id+'">'+ico.cart+'Add to cart</button></div>';}).join('')+'</div></div>';
   }
+
+  /* ---------- CART PAGE (Figma table layout) ---------- */
+  var COUPON_PCT=5; /* TODO: coupon discount % (real coupon logic yahan connect karo) */
+  function pad2(n){return n<10?'0'+n:String(n);}
+  function inr(n){return '₹ '+Number(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function inr0(n){return '₹'+Number(n).toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2});}
+  function isDesk(){return window.matchMedia('(min-width:701px)').matches;}
+  function pageCartHTML(inDrawer){
+    var top=inDrawer?'<div class="ct-top"><h2>Shopping Cart ('+count()+')</h2><span class="ct-top__r"><a class="ct-view" href="cart.html">View Cart</a><button type="button" class="x-btn" data-cart-close aria-label="Close cart">'+ico.x+'</button></span></div>':'';
+    return top+pageCartInner();
+  }
+  function pageCartInner(){
+    if(!items.length)return '<div class="ct"><div class="ct-empty"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><h3>Your cart is empty</h3><p>Add some products to see them here.</p><a class="btn-red" href="category.html">Continue Shopping</a></div></div>';
+    var sub=subtotal(),disc=Math.round(sub*COUPON_PCT)/100,total=sub-disc;
+    var rows=items.map(function(it,idx){var p=BY_ID[it.id],v=p.variants[it.v];
+      return '<div class="ct-grid ct-row" data-idx="'+idx+'"><a class="ct-img" href="product.html?id='+p.id+'"><img src="'+p.image+'" alt="'+esc(p.title)+'"></a>'+
+        '<div class="ct-name"><a href="product.html?id='+p.id+'">'+esc(p.title)+'</a><small>'+esc(v.label)+'</small></div>'+
+        '<div class="ct-price">'+inr(v.price)+'</div>'+
+        '<div class="ct-qty"><div class="qty"><button type="button" data-q="-1" aria-label="Decrease quantity">-</button><input type="text" inputmode="numeric" value="'+pad2(it.qty)+'" aria-label="Quantity"><button type="button" data-q="1" aria-label="Increase quantity">+</button></div></div>'+
+        '<div class="ct-sub">'+inr(v.price*it.qty)+'</div>'+
+        '<button type="button" class="ct-del" aria-label="Remove '+esc(p.title)+'">'+ico.trash+'</button></div>';}).join('');
+    return '<div class="ct"><div class="ct-left"><div class="ct-grid ct-head"><span class="ct-h-prod">Product</span><span>Price</span><span>Quantity</span><span>Subtotal</span><span></span></div>'+rows+
+      '<div class="ct-clear"><button type="button" data-clear>Clear shopping cart</button></div></div>'+
+      '<aside><div class="ct-sum"><h2>Order Summary</h2><div class="ct-sum__body">'+
+      '<div class="ct-line"><span>Items</span><b>'+count()+'</b></div>'+
+      '<div class="ct-line"><span>Sub Total</span><b>'+inr(sub)+'</b></div>'+
+      '<div class="ct-line"><span>Shipping</span><b>'+inr0(0)+'</b></div>'+
+      '<div class="ct-line"><span>Taxes</span><b>'+inr0(0)+'</b></div>'+
+      '<div class="ct-line"><span>Coupon Discount</span><b>₹-'+disc.toLocaleString('en-IN',{minimumFractionDigits:2,maximumFractionDigits:2})+'</b></div>'+
+      '<hr><div class="ct-line ct-line--total"><span>Total</span><b>'+inr0(total)+'</b></div>'+
+      '<a class="ct-btn ct-btn--in" href="#checkout">Proceed to Checkout</a></div></div>'+
+      '<a class="ct-btn ct-btn--out" href="#checkout">Proceed to Checkout</a></aside></div>';
+  }
   function cartHTML(){
+    if(PAGE==='cart')return pageCartHTML(false);
+    if(isDesk())return pageCartHTML(true);
     var n=count(),sub=subtotal();
     var head='<div class="cart__head">'+ico.cartBig+'<h2>Shopping cart ('+n+')</h2><button type="button" class="x-btn cart__close" data-cart-close aria-label="Close cart">'+ico.x+'</button></div>';
     if(!items.length)return head+'<div class="cart__scroll"><div class="cart-empty"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h9.2a1 1 0 0 0 1-.8L20.5 7H6"/><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/></svg><h3>Your cart is empty</h3><p>Add products worth '+rupee(TIERS[0].at)+' to unlock free gifts.</p><a class="btn-red" href="category.html">Continue Shopping</a></div>'+fbtHTML()+'</div>';
@@ -1151,7 +1335,7 @@ body.cart-open{overflow:hidden}
       '<div class="cart__foot"><div class="cart__sub"><span>SubTotal</span><strong>'+money(sub)+'</strong></div>'+
       '<div class="cart__pin">'+ico.pin+'Check delivery to your pincode. <button type="button" class="link" data-pin-toggle>Enter pincode ›</button>'+
       '<form class="pin-form" data-pin-form><input inputmode="numeric" maxlength="6" placeholder="6-digit pincode" aria-label="Pincode"><button class="btn-red" type="submit">Check</button></form><div class="pin-msg" aria-live="polite"></div></div>'+
-      '<a class="btn-red cart__checkout" href="#checkout">Check Out</a></div>';
+      '<a class="cart__view" href="cart.html">View Cart</a><a class="btn-red cart__checkout" href="#checkout">Check Out</a></div>';
   }
   var cartRoots=[];
   function renderAll(){
@@ -1169,18 +1353,20 @@ body.cart-open{overflow:hidden}
     drawer.innerHTML='<div class="cart-drawer__shade" data-cart-close></div><div class="cart-drawer__box" role="dialog" aria-modal="true"><div class="cart"></div></div>';
     document.body.appendChild(drawer);cartRoots.push(drawer.querySelector('.cart'));
   }else{var root=$('#cart-root');if(root)cartRoots.push(root);}
+  window.matchMedia('(min-width:701px)').addEventListener('change',function(){renderAll();});
   var headerCart=$('.header-cart');
-  if(headerCart){headerCart.setAttribute('href','cart.html');headerCart.addEventListener('click',function(e){if(PAGE==='cart')return;e.preventDefault();openCart();});}
+  if(headerCart){headerCart.setAttribute('href','cart.html');headerCart.addEventListener('click',function(e){e.preventDefault();if(PAGE==='cart'){window.scrollTo({top:0,behavior:'smooth'});return;}openCart();});}
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeCart();});
 
   /* cart interactions (event delegation) */
   document.addEventListener('click',function(e){
     var t=e.target;
     if(t.closest('[data-cart-close]')){closeCart();return;}
-    var row=t.closest('.c-item');
+    if(t.closest('[data-clear]')){items=[];save(items);renderAll();toast('Cart cleared');return;}
+    var row=t.closest('.c-item, .ct-row');
     if(row){var idx=+row.dataset.idx;
-      var qb=t.closest('[data-q]');if(qb){setQty(idx,items[idx].qty+(+qb.dataset.q));return;}
-      if(t.closest('.c-del')){var nm=BY_ID[items[idx].id].title;setQty(idx,0);toast(nm+' removed');return;}
+      var qb=t.closest('[data-q]');if(qb){var nq=items[idx].qty+(+qb.dataset.q);if(nq<1&&row.classList.contains('ct-row'))return;setQty(idx,nq);return;}
+      if(t.closest('.c-del, .ct-del')){var nm=BY_ID[items[idx].id].title;setQty(idx,0);toast(nm+' removed');return;}
     }
     var fb=t.closest('[data-fbt]');if(fb){addItem(fb.dataset.fbt,0,1);toast('Added to cart');return;}
     if(t.closest('[data-pin-toggle]')){var f=t.closest('.cart__pin').querySelector('[data-pin-form]');f.classList.toggle('show');if(f.classList.contains('show'))f.querySelector('input').focus();return;}
@@ -1190,7 +1376,7 @@ body.cart-open{overflow:hidden}
       var h=ac.innerHTML;ac.textContent='Added ✓';setTimeout(function(){ac.innerHTML=h;},900);openCart();}
     if(t.closest('a[href="#checkout"]')){e.preventDefault();toast('Checkout connect karna hai (Shopify / payment gateway)');}
   });
-  document.addEventListener('change',function(e){var inp=e.target.closest('.c-item .qty input');if(!inp)return;var idx=+inp.closest('.c-item').dataset.idx;setQty(idx,Math.max(1,parseInt(inp.value,10)||1));});
+  document.addEventListener('change',function(e){var inp=e.target.closest('.c-item .qty input, .ct-row .qty input');if(!inp)return;var idx=+inp.closest('.c-item, .ct-row').dataset.idx;setQty(idx,Math.max(1,parseInt(inp.value,10)||1));});
   document.addEventListener('submit',function(e){
     var f=e.target.closest('[data-pin-form]');if(!f)return;e.preventDefault();
     var v=f.querySelector('input').value.trim(),m=f.parentNode.querySelector('.pin-msg');
